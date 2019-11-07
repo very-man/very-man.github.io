@@ -1,0 +1,1344 @@
+<!DOCTYPE HTML>
+<html lang="zh-CN">
+
+
+<head>
+    <meta charset="utf-8">
+    <meta name="keywords" content="推荐系统, 孙亮亮的博客">
+    <meta name="description" content="推荐系统
+推荐算法的本质是通过一定的方式将用户和物品联系起来，而不同的推荐系统利用了不同的方式
+在信息过载的环境中帮助用户发现令他们感兴趣的信息，也能将信息推送给对它们感兴趣的用户
+
+1.推荐系统的应用
+电子商务:亚马逊基于物品的推荐 好友">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="renderer" content="webkit|ie-stand|ie-comp">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <title>推荐系统 | 孙亮亮的博客</title>
+    <link rel="icon" type="image/png" href="/favicon.png">
+
+    <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
+    <link rel="stylesheet" type="text/css" href="/libs/materialize/materialize.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/aos/aos.css">
+    <link rel="stylesheet" type="text/css" href="/libs/animate/animate.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/lightGallery/css/lightgallery.min.css">
+    <link rel="stylesheet" type="text/css" href="/css/matery.css">
+    <link rel="stylesheet" type="text/css" href="/css/my.css">
+    
+    <script src="/libs/jquery/jquery.min.js"></script>
+    
+<link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css">
+<link rel="stylesheet" href="/css/prism-line-numbers.css" type="text/css"></head>
+
+
+<body>
+    <header class="navbar-fixed">
+    <nav id="headNav" class="bg-color nav-transparent">
+        <div id="navContainer" class="nav-wrapper head-container">
+            <div class="brand-logo">
+                <a href="/" class="waves-effect waves-light">
+                    
+                    <img src="/medias/logo.png" class="logo-img" alt="LOGO">
+                    
+                    <span class="logo-span">孙亮亮的博客</span>
+                </a>
+            </div>
+            
+
+<a href="#" data-target="mobile-nav" class="sidenav-trigger button-collapse"><i class="fas fa-bars"></i></a>
+<ul class="right nav-menu">
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/" class="waves-effect waves-light">
+      
+      <i class="fas fa-home" style="zoom: 0.6;"></i>
+      
+      <span>首页</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/tags" class="waves-effect waves-light">
+      
+      <i class="fas fa-tags" style="zoom: 0.6;"></i>
+      
+      <span>标签</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/categories" class="waves-effect waves-light">
+      
+      <i class="fas fa-bookmark" style="zoom: 0.6;"></i>
+      
+      <span>分类</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/archives" class="waves-effect waves-light">
+      
+      <i class="fas fa-archive" style="zoom: 0.6;"></i>
+      
+      <span>归档</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/about" class="waves-effect waves-light">
+      
+      <i class="fas fa-user-circle" style="zoom: 0.6;"></i>
+      
+      <span>关于</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/contact" class="waves-effect waves-light">
+      
+      <i class="fas fa-comments" style="zoom: 0.6;"></i>
+      
+      <span>留言板</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/friends" class="waves-effect waves-light">
+      
+      <i class="fas fa-address-book" style="zoom: 0.6;"></i>
+      
+      <span>友情链接</span>
+    </a>
+    
+  </li>
+  
+  <li>
+    <a href="#searchModal" class="modal-trigger waves-effect waves-light">
+      <i id="searchIcon" class="fas fa-search" title="搜索" style="zoom: 0.85;"></i>
+    </a>
+  </li>
+</ul>
+
+<div id="mobile-nav" class="side-nav sidenav">
+
+    <div class="mobile-head bg-color">
+        
+        <img src="/medias/logo.png" class="logo-img circle responsive-img">
+        
+        <div class="logo-name">孙亮亮的博客</div>
+        <div class="logo-desc">
+            
+            Never really desperate, only the lost of the soul.
+            
+        </div>
+    </div>
+
+    
+
+    <ul class="menu-list mobile-menu-list">
+        
+        <li class="m-nav-item">
+	  
+		<a href="/" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-home"></i>
+			
+			首页
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/tags" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-tags"></i>
+			
+			标签
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/categories" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-bookmark"></i>
+			
+			分类
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/archives" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-archive"></i>
+			
+			归档
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/about" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-user-circle"></i>
+			
+			关于
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/contact" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-comments"></i>
+			
+			Contact
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/friends" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-address-book"></i>
+			
+			友情链接
+		</a>
+          
+        </li>
+        
+        
+        <li><div class="divider"></div></li>
+        <li>
+            <a href="https://github.com/very-man.github.io" class="waves-effect waves-light" target="_blank">
+                <i class="fab fa-github-square fa-fw"></i>Fork Me
+            </a>
+        </li>
+        
+    </ul>
+</div>
+
+        </div>
+
+        
+            <style>
+    .nav-transparent .github-corner {
+        display: none !important;
+    }
+
+    .github-corner {
+        position: absolute;
+        z-index: 10;
+        top: 0;
+        right: 0;
+        border: 0;
+        transform: scale(1.1);
+    }
+
+    .github-corner svg {
+        color: #0f9d58;
+        fill: #fff;
+        height: 64px;
+        width: 64px;
+    }
+
+    .github-corner:hover .octo-arm {
+        animation: a 0.56s ease-in-out;
+    }
+
+    .github-corner .octo-arm {
+        animation: none;
+    }
+
+    @keyframes a {
+        0%,
+        to {
+            transform: rotate(0);
+        }
+        20%,
+        60% {
+            transform: rotate(-25deg);
+        }
+        40%,
+        80% {
+            transform: rotate(10deg);
+        }
+    }
+</style>
+
+<a href="https://github.com/very-man.github.io" class="github-corner tooltipped hide-on-med-and-down" target="_blank"
+   data-tooltip="Fork Me" data-position="left" data-delay="50">
+    <svg viewBox="0 0 250 250" aria-hidden="true">
+        <path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path>
+        <path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2"
+              fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path>
+        <path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z"
+              fill="currentColor" class="octo-body"></path>
+    </svg>
+</a>
+        
+    </nav>
+
+</header>
+
+    
+
+
+
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/20.jpg')">
+    <div class="container" style="right: 0px;left: 0px;">
+        <div class="row">
+            <div class="col s12 m12 l12">
+                <div class="brand">
+                    <div class="description center-align post-title">
+                        推荐系统
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+<main class="post-container content">
+
+    
+    <link rel="stylesheet" href="/libs/tocbot/tocbot.css">
+<style>
+    #articleContent h1::before,
+    #articleContent h2::before,
+    #articleContent h3::before,
+    #articleContent h4::before,
+    #articleContent h5::before,
+    #articleContent h6::before {
+        display: block;
+        content: " ";
+        height: 100px;
+        margin-top: -100px;
+        visibility: hidden;
+    }
+
+    #articleContent :focus {
+        outline: none;
+    }
+
+    .toc-fixed {
+        position: fixed;
+        top: 64px;
+    }
+
+    .toc-widget {
+        padding-left: 20px;
+    }
+
+    .toc-widget .toc-title {
+        margin: 35px 0 15px 0;
+        padding-left: 17px;
+        font-size: 1.5rem;
+        font-weight: bold;
+        line-height: 1.5rem;
+    }
+
+    .toc-widget ol {
+        padding: 0;
+        list-style: none;
+    }
+
+    #toc-content ol {
+        padding-left: 10px;
+    }
+
+    #toc-content ol li {
+        padding-left: 10px;
+    }
+
+    #toc-content .toc-link:hover {
+        color: #42b983;
+        font-weight: 700;
+        text-decoration: underline;
+    }
+
+    #toc-content .toc-link::before {
+        background-color: transparent;
+        max-height: 25px;
+    }
+
+    #toc-content .is-active-link {
+        color: #42b983;
+    }
+
+    #toc-content .is-active-link::before {
+        background-color: #42b983;
+    }
+
+    #floating-toc-btn {
+        position: fixed;
+        right: 15px;
+        bottom: 76px;
+        padding-top: 15px;
+        margin-bottom: 0;
+        z-index: 998;
+    }
+
+    #floating-toc-btn .btn-floating {
+        width: 48px;
+        height: 48px;
+    }
+
+    #floating-toc-btn .btn-floating i {
+        line-height: 48px;
+        font-size: 1.4rem;
+    }
+</style>
+<div class="row">
+    <div id="main-content" class="col s12 m12 l9">
+        <!-- 文章内容详情 -->
+<div id="artDetail">
+    <div class="card">
+        <div class="card-content article-info">
+            <div class="row tag-cate">
+                <div class="col s7">
+                    
+                    <div class="article-tag">
+                        
+                            <a href="/tags/%E6%8E%A8%E8%8D%90%E7%B3%BB%E7%BB%9F/">
+                                <span class="chip bg-color">推荐系统</span>
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+                <div class="col s5 right-align">
+                    
+                    <div class="post-cate">
+                        <i class="fas fa-bookmark fa-fw icon-category"></i>
+                        
+                            <a href="/categories/%E6%8E%A8%E8%8D%90%E7%B3%BB%E7%BB%9F/" class="post-category">
+                                推荐系统
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+
+            <div class="post-info">
+                
+                <div class="post-date info-break-policy">
+                    <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
+                    2019-11-05
+                </div>
+                
+
+                
+
+                
+                <div class="info-break-policy">
+                    <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
+                    4.4k
+                </div>
+                
+
+                
+                <div class="info-break-policy">
+                    <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
+                    15 分
+                </div>
+                
+				
+                
+                    <div id="busuanzi_container_page_pv" class="info-break-policy">
+                        <i class="far fa-eye fa-fw"></i>阅读次数:&nbsp;&nbsp;
+                        <span id="busuanzi_value_page_pv"></span>
+                    </div>
+				
+            </div>
+            
+        </div>
+        <hr class="clearfix">
+        <div class="card-content article-card-content">
+            <div id="articleContent">
+                <h1 id="推荐系统"><a href="#推荐系统" class="headerlink" title="推荐系统"></a>推荐系统</h1><ul>
+<li><h3 id="推荐算法的本质是通过一定的方式将用户和物品联系起来，而不同的推荐系统利用了不同的方式"><a href="#推荐算法的本质是通过一定的方式将用户和物品联系起来，而不同的推荐系统利用了不同的方式" class="headerlink" title="推荐算法的本质是通过一定的方式将用户和物品联系起来，而不同的推荐系统利用了不同的方式"></a>推荐算法的本质是通过一定的方式将用户和物品联系起来，而不同的推荐系统利用了不同的方式</h3></li>
+<li><h3 id="在信息过载的环境中帮助用户发现令他们感兴趣的信息，也能将信息推送给对它们感兴趣的用户"><a href="#在信息过载的环境中帮助用户发现令他们感兴趣的信息，也能将信息推送给对它们感兴趣的用户" class="headerlink" title="在信息过载的环境中帮助用户发现令他们感兴趣的信息，也能将信息推送给对它们感兴趣的用户"></a>在信息过载的环境中帮助用户发现令他们感兴趣的信息，也能将信息推送给对它们感兴趣的用户</h3></li>
+</ul>
+<h2 id="1-推荐系统的应用"><a href="#1-推荐系统的应用" class="headerlink" title="1.推荐系统的应用"></a>1.推荐系统的应用</h2><blockquote>
+<h4 id="电子商务"><a href="#电子商务" class="headerlink" title="电子商务:"></a>电子商务:</h4><p>亚马逊<br>基于物品的推荐 好友关系推荐 相关推荐(购买过该产品的用户也够买过其他的，浏览过该商品的也浏览过其他）</p>
+</blockquote>
+<blockquote>
+<h4 id="电影和视频网站"><a href="#电影和视频网站" class="headerlink" title="电影和视频网站"></a>电影和视频网站</h4><p>Netflix YouTube 基于物品推荐</p>
+</blockquote>
+<blockquote>
+<h4 id="个性化音乐网络电台"><a href="#个性化音乐网络电台" class="headerlink" title="个性化音乐网络电台"></a>个性化音乐网络电台</h4><p>pandora基于内容推荐， 歌曲的旋律节奏，编曲和歌词进行标注，标注称为音乐基因，计算歌曲相似度给用户推荐<br>last.fm 计算不同用户在歌曲上喜好相似度，给用户推荐和他有相似喜好的用户喜欢的歌 基于用户行为</p>
+</blockquote>
+<blockquote>
+<h4 id="社交网络"><a href="#社交网络" class="headerlink" title="社交网络"></a>社交网络</h4><p>好友的行为推荐给用户， 好友推荐</p>
+</blockquote>
+<blockquote>
+<h4 id="个性化阅读"><a href="#个性化阅读" class="headerlink" title="个性化阅读"></a>个性化阅读</h4><p>基于内容和基于相似用户的喜好</p>
+</blockquote>
+<blockquote>
+<h4 id="基于位置的服务"><a href="#基于位置的服务" class="headerlink" title="基于位置的服务"></a>基于位置的服务</h4><p>地图定位，搜索附近</p>
+</blockquote>
+<blockquote>
+<h4 id="个性化邮件"><a href="#个性化邮件" class="headerlink" title="个性化邮件"></a>个性化邮件</h4><p>基于内容</p>
+</blockquote>
+<blockquote>
+<h4 id="个性化广告"><a href="#个性化广告" class="headerlink" title="个性化广告"></a>个性化广告</h4><p>上下文广告：分析用户正在浏览的网页内容，推荐和网页内容相关的广告 谷歌Adsense<br>搜索广告：通过分析用户在当前会话中的搜索记录，判断用户的搜索目的，投放广告<br>个性化展示广告：不同的用户展示不同的广告</p>
+</blockquote>
+<h2 id="2-推荐系统的评测"><a href="#2-推荐系统的评测" class="headerlink" title="2.推荐系统的评测"></a>2.推荐系统的评测</h2><blockquote>
+<h4 id="满意度：用户满意度-问卷调查"><a href="#满意度：用户满意度-问卷调查" class="headerlink" title="满意度：用户满意度(问卷调查)"></a>满意度：用户满意度(问卷调查)</h4><h4 id="预测准确度：均方根误差RMSE-平均绝对误差MAE，topn推荐-混淆矩阵"><a href="#预测准确度：均方根误差RMSE-平均绝对误差MAE，topn推荐-混淆矩阵" class="headerlink" title="预测准确度：均方根误差RMSE,平均绝对误差MAE，topn推荐(混淆矩阵)"></a>预测准确度：均方根误差RMSE,平均绝对误差MAE，topn推荐(混淆矩阵)</h4><h4 id="覆盖率：描述对物品长尾的发掘能力，推荐系统推荐的列表占总物品的比例-信息熵和基尼系数"><a href="#覆盖率：描述对物品长尾的发掘能力，推荐系统推荐的列表占总物品的比例-信息熵和基尼系数" class="headerlink" title="覆盖率：描述对物品长尾的发掘能力，推荐系统推荐的列表占总物品的比例(信息熵和基尼系数)"></a>覆盖率：描述对物品长尾的发掘能力，推荐系统推荐的列表占总物品的比例(信息熵和基尼系数)</h4><h4 id="多样性：基于不同相似度的计算推荐不同的多样性列表-基于内容，基于协同过滤"><a href="#多样性：基于不同相似度的计算推荐不同的多样性列表-基于内容，基于协同过滤" class="headerlink" title="多样性：基于不同相似度的计算推荐不同的多样性列表(基于内容，基于协同过滤)"></a>多样性：基于不同相似度的计算推荐不同的多样性列表(基于内容，基于协同过滤)</h4><h4 id="新颖性：推荐用户没有听过的商物品-例如用户喜欢动作类型的电影，给用户推荐了一部从来没有听说过的也属于动作类型的电影"><a href="#新颖性：推荐用户没有听过的商物品-例如用户喜欢动作类型的电影，给用户推荐了一部从来没有听说过的也属于动作类型的电影" class="headerlink" title="新颖性：推荐用户没有听过的商物品(例如用户喜欢动作类型的电影，给用户推荐了一部从来没有听说过的也属于动作类型的电影)"></a>新颖性：推荐用户没有听过的商物品(例如用户喜欢动作类型的电影，给用户推荐了一部从来没有听说过的也属于动作类型的电影)</h4><h4 id="惊喜度：推荐个用户兴趣之外的物品给用户，用户觉得非常满意，代表惊喜度很高"><a href="#惊喜度：推荐个用户兴趣之外的物品给用户，用户觉得非常满意，代表惊喜度很高" class="headerlink" title="惊喜度：推荐个用户兴趣之外的物品给用户，用户觉得非常满意，代表惊喜度很高"></a>惊喜度：推荐个用户兴趣之外的物品给用户，用户觉得非常满意，代表惊喜度很高</h4><h4 id="信任度：度量推荐系统的信任度只能通过调查问卷，可以通过增加推荐系统透明度来提高信任度-例如让用户了解推荐系统的运行机制，其次通过好友的信息来推荐，并用好友做推荐解释，让用户对推荐系统有认同感"><a href="#信任度：度量推荐系统的信任度只能通过调查问卷，可以通过增加推荐系统透明度来提高信任度-例如让用户了解推荐系统的运行机制，其次通过好友的信息来推荐，并用好友做推荐解释，让用户对推荐系统有认同感" class="headerlink" title="信任度：度量推荐系统的信任度只能通过调查问卷，可以通过增加推荐系统透明度来提高信任度(例如让用户了解推荐系统的运行机制，其次通过好友的信息来推荐，并用好友做推荐解释，让用户对推荐系统有认同感)"></a>信任度：度量推荐系统的信任度只能通过调查问卷，可以通过增加推荐系统透明度来提高信任度(例如让用户了解推荐系统的运行机制，其次通过好友的信息来推荐，并用好友做推荐解释，让用户对推荐系统有认同感)</h4><h4 id="实时性：新闻，微博，用户推荐列表中有多大比例的物品是当天新加"><a href="#实时性：新闻，微博，用户推荐列表中有多大比例的物品是当天新加" class="headerlink" title="实时性：新闻，微博，用户推荐列表中有多大比例的物品是当天新加"></a>实时性：新闻，微博，用户推荐列表中有多大比例的物品是当天新加</h4><h4 id="健壮性：抗作弊，例如用户购买A后，也经常购买其他商品，这里是统计购买其他商品的次数来推荐，这样可以注册很多账号，购买A后同时购买这个商品，提高次数。针对评分系统，刷评分。给定一个数据集和算法，生成推荐列表，然后向数据中加入噪声数据，生成噪声推荐列表，看是否发生大的变化"><a href="#健壮性：抗作弊，例如用户购买A后，也经常购买其他商品，这里是统计购买其他商品的次数来推荐，这样可以注册很多账号，购买A后同时购买这个商品，提高次数。针对评分系统，刷评分。给定一个数据集和算法，生成推荐列表，然后向数据中加入噪声数据，生成噪声推荐列表，看是否发生大的变化" class="headerlink" title="健壮性：抗作弊，例如用户购买A后，也经常购买其他商品，这里是统计购买其他商品的次数来推荐，这样可以注册很多账号，购买A后同时购买这个商品，提高次数。针对评分系统，刷评分。给定一个数据集和算法，生成推荐列表，然后向数据中加入噪声数据，生成噪声推荐列表，看是否发生大的变化"></a>健壮性：抗作弊，例如用户购买A后，也经常购买其他商品，这里是统计购买其他商品的次数来推荐，这样可以注册很多账号，购买A后同时购买这个商品，提高次数。针对评分系统，刷评分。给定一个数据集和算法，生成推荐列表，然后向数据中加入噪声数据，生成噪声推荐列表，看是否发生大的变化</h4><h4 id="商业目标：一个用户给公司带来的利益-销售额，广告展示总数，广告点击数等"><a href="#商业目标：一个用户给公司带来的利益-销售额，广告展示总数，广告点击数等" class="headerlink" title="商业目标：一个用户给公司带来的利益(销售额，广告展示总数，广告点击数等)"></a>商业目标：一个用户给公司带来的利益(销售额，广告展示总数，广告点击数等)</h4><p><img src="https://static-cdn.verystar.net/s/pay/verydoc/pic/20190613/5f2ac1e0e6ba88b3e587d5275a2d48b6.png" alt="file"></p>
+</blockquote>
+<h2 id="3-利用用户行为数据"><a href="#3-利用用户行为数据" class="headerlink" title="3.利用用户行为数据"></a>3.利用用户行为数据</h2><blockquote>
+<h4 id="日志分析：网页浏览，购买，点击，评分，评论等"><a href="#日志分析：网页浏览，购买，点击，评分，评论等" class="headerlink" title="日志分析：网页浏览，购买，点击，评分，评论等"></a>日志分析：网页浏览，购买，点击，评分，评论等</h4><p>显性反馈：明确表示对物品的喜好行为(喜欢/不喜欢，评分1-5)<br>隐性反馈：不能明确反应用户的喜好行为(浏览，购买，观看，阅读，听歌)<br>反馈方式：正向反馈和负向反馈</p>
+<blockquote>
+<p><img src="https://static-cdn.verystar.net/s/pay/verydoc/pic/20190613/36c8c6a81a074613ee9c58b15066978a.png" alt="file"></p>
+</blockquote>
+</blockquote>
+<blockquote>
+<h4 id="用户行为分析"><a href="#用户行为分析" class="headerlink" title="用户行为分析"></a>用户行为分析</h4><h6 id="用户活跃度和物品流行度都满足长尾分布"><a href="#用户活跃度和物品流行度都满足长尾分布" class="headerlink" title="用户活跃度和物品流行度都满足长尾分布"></a>用户活跃度和物品流行度都满足长尾分布</h6><h6 id="长尾分布：作为全球排名第一的购物网站，亚马逊拥有超高的图书销售量，尤其是长尾产品描述。“搜索引擎指南”发现，亚马逊通过长尾搜索产生了57％的销售额"><a href="#长尾分布：作为全球排名第一的购物网站，亚马逊拥有超高的图书销售量，尤其是长尾产品描述。“搜索引擎指南”发现，亚马逊通过长尾搜索产生了57％的销售额" class="headerlink" title="长尾分布：作为全球排名第一的购物网站，亚马逊拥有超高的图书销售量，尤其是长尾产品描述。“搜索引擎指南”发现，亚马逊通过长尾搜索产生了57％的销售额"></a>长尾分布：作为全球排名第一的购物网站，亚马逊拥有超高的图书销售量，尤其是长尾产品描述。“搜索引擎指南”发现，亚马逊通过长尾搜索产生了57％的销售额</h6><p><img src="https://static-cdn.verystar.net/s/pay/verydoc/pic/20190613/55ae3048e81689df01d7f51d2b935170.png" alt="file"></p>
+<h6 id="用户活跃度和物品流行度的关系：越活跃的用户浏览会逐渐浏览冷门的物品"><a href="#用户活跃度和物品流行度的关系：越活跃的用户浏览会逐渐浏览冷门的物品" class="headerlink" title="用户活跃度和物品流行度的关系：越活跃的用户浏览会逐渐浏览冷门的物品"></a>用户活跃度和物品流行度的关系：越活跃的用户浏览会逐渐浏览冷门的物品</h6><h6 id="协同过滤算法：基于邻域的方法，隐语义模型，基于图的随机游走。基于邻域的只要包含基于用户和物品的协同过滤，一个是计算用户间的相似度，一个是计算物品间的相似度。"><a href="#协同过滤算法：基于邻域的方法，隐语义模型，基于图的随机游走。基于邻域的只要包含基于用户和物品的协同过滤，一个是计算用户间的相似度，一个是计算物品间的相似度。" class="headerlink" title="协同过滤算法：基于邻域的方法，隐语义模型，基于图的随机游走。基于邻域的只要包含基于用户和物品的协同过滤，一个是计算用户间的相似度，一个是计算物品间的相似度。"></a>协同过滤算法：基于邻域的方法，隐语义模型，基于图的随机游走。基于邻域的只要包含基于用户和物品的协同过滤，一个是计算用户间的相似度，一个是计算物品间的相似度。</h6></blockquote>
+<blockquote>
+<h4 id="基于用户相似度的协同过滤"><a href="#基于用户相似度的协同过滤" class="headerlink" title="基于用户相似度的协同过滤"></a>基于用户相似度的协同过滤</h4><p><img src="https://static-cdn.verystar.net/s/pay/verydoc/pic/20190613/759db5de96947d4e617a04e1701f5c29.png" alt="file"></p>
+<h6 id="Jaccard公式"><a href="#Jaccard公式" class="headerlink" title="Jaccard公式:"></a>Jaccard公式:<img src="https://static-cdn.verystar.net/s/pay/verydoc/pic/20190613/1e14389954d7522faf7d472db36ab5a0.png" alt="file"></h6><h6 id="余弦相似度："><a href="#余弦相似度：" class="headerlink" title="余弦相似度："></a>余弦相似度：<img src="https://static-cdn.verystar.net/s/pay/verydoc/pic/20190613/3399303cbb2c3b7ccd30d6c9048ed562.png" alt="file"></h6><h6 id="用户A和用户B的兴趣相似度："><a href="#用户A和用户B的兴趣相似度：" class="headerlink" title="用户A和用户B的兴趣相似度："></a>用户A和用户B的兴趣相似度：<img src="https://static-cdn.verystar.net/s/pay/verydoc/pic/20190613/a3551e3a36663a45fb082a6917157dad.png" alt="file"></h6><h6 id="由于对两两用户计算相似度非常耗时，而且很多用户之前没有对同样对物品产生行为，这里对数据集进行了处理，算出一个倒排表，表里对两个用户对应的值是余弦相似度的分子。"><a href="#由于对两两用户计算相似度非常耗时，而且很多用户之前没有对同样对物品产生行为，这里对数据集进行了处理，算出一个倒排表，表里对两个用户对应的值是余弦相似度的分子。" class="headerlink" title="由于对两两用户计算相似度非常耗时，而且很多用户之前没有对同样对物品产生行为，这里对数据集进行了处理，算出一个倒排表，表里对两个用户对应的值是余弦相似度的分子。"></a>由于对两两用户计算相似度非常耗时，而且很多用户之前没有对同样对物品产生行为，这里对数据集进行了处理，算出一个倒排表，表里对两个用户对应的值是余弦相似度的分子。</h6><h6 id="得到用户之间的兴趣相似度后，UserCF算法会给用户推荐和他兴趣最相似的K个用户喜欢的物品。如下的公式度量了UserCF算法中用户u对物品i的感兴趣程度"><a href="#得到用户之间的兴趣相似度后，UserCF算法会给用户推荐和他兴趣最相似的K个用户喜欢的物品。如下的公式度量了UserCF算法中用户u对物品i的感兴趣程度" class="headerlink" title="得到用户之间的兴趣相似度后，UserCF算法会给用户推荐和他兴趣最相似的K个用户喜欢的物品。如下的公式度量了UserCF算法中用户u对物品i的感兴趣程度:"></a>得到用户之间的兴趣相似度后，UserCF算法会给用户推荐和他兴趣最相似的K个用户喜欢的物品。如下的公式度量了UserCF算法中用户u对物品i的感兴趣程度:<img src="https://static-cdn.verystar.net/s/pay/verydoc/pic/20190613/21e79a404299218adabe69b887e9f59d.png" alt="file"></h6><h6 id="其中，S-u-K-包含和用户u兴趣最接近的K个用户，N-i-是对物品i有过行为的用户集合，wuv-是用户u和用户v的兴趣相似度，rvi代表用户v对物品i的兴趣，因为使用的是单一行为的隐反馈数-据，所以所有的rvi-1"><a href="#其中，S-u-K-包含和用户u兴趣最接近的K个用户，N-i-是对物品i有过行为的用户集合，wuv-是用户u和用户v的兴趣相似度，rvi代表用户v对物品i的兴趣，因为使用的是单一行为的隐反馈数-据，所以所有的rvi-1" class="headerlink" title="其中，S(u, K)包含和用户u兴趣最接近的K个用户，N(i)是对物品i有过行为的用户集合，wuv 是用户u和用户v的兴趣相似度，rvi代表用户v对物品i的兴趣，因为使用的是单一行为的隐反馈数 据，所以所有的rvi=1"></a>其中，S(u, K)包含和用户u兴趣最接近的K个用户，N(i)是对物品i有过行为的用户集合，wuv 是用户u和用户v的兴趣相似度，rvi代表用户v对物品i的兴趣，因为使用的是单一行为的隐反馈数 据，所以所有的rvi=1</h6><h6 id="这里取k-3-与A兴趣最接近的三个用户，A用户对c-e没有过行为，把这两个物品推荐给用户A"><a href="#这里取k-3-与A兴趣最接近的三个用户，A用户对c-e没有过行为，把这两个物品推荐给用户A" class="headerlink" title="这里取k=3,与A兴趣最接近的三个用户，A用户对c,e没有过行为，把这两个物品推荐给用户A"></a>这里取k=3,与A兴趣最接近的三个用户，A用户对c,e没有过行为，把这两个物品推荐给用户A</h6><p><img src="https://static-cdn.verystar.net/s/pay/verydoc/pic/20190613/fd9074ecf8b3bcf1d12ccd11987dd785.png" alt="file"></p>
+<h6 id="用户相似度的改进，增加了惩罚项，这个的N-i-书中没有说是什么值，只说了惩罚了用户u和用户v共同兴趣列表中热门物品对他们相似度的影响，所以这个值猜测跟上面一样，喜欢物品i的用户有多少即物品的热门程度"><a href="#用户相似度的改进，增加了惩罚项，这个的N-i-书中没有说是什么值，只说了惩罚了用户u和用户v共同兴趣列表中热门物品对他们相似度的影响，所以这个值猜测跟上面一样，喜欢物品i的用户有多少即物品的热门程度" class="headerlink" title="用户相似度的改进，增加了惩罚项，这个的N(i)书中没有说是什么值，只说了惩罚了用户u和用户v共同兴趣列表中热门物品对他们相似度的影响，所以这个值猜测跟上面一样，喜欢物品i的用户有多少即物品的热门程度"></a>用户相似度的改进，增加了惩罚项，这个的N(i)书中没有说是什么值，只说了惩罚了用户u和用户v共同兴趣列表中热门物品对他们相似度的影响，所以这个值猜测跟上面一样，喜欢物品i的用户有多少即物品的热门程度</h6><p><img src="https://static-cdn.verystar.net/s/pay/verydoc/pic/20190613/1e25efc40205d128e16113fb88c061da.png" alt="file"></p>
+</blockquote>
+<blockquote>
+<h4 id="基于物品的协同过滤"><a href="#基于物品的协同过滤" class="headerlink" title="基于物品的协同过滤"></a>基于物品的协同过滤</h4><h6 id="这里基于物品的相似计算和基于用户的类似"><a href="#这里基于物品的相似计算和基于用户的类似" class="headerlink" title="这里基于物品的相似计算和基于用户的类似"></a>这里基于物品的相似计算和基于用户的类似</h6><p><img src="https://static-cdn.verystar.net/s/pay/verydoc/pic/20190613/2ee5e4397f4b43d4070bf7e0b2a37b72.png" alt="file"><br><img src="https://static-cdn.verystar.net/s/pay/verydoc/pic/20190613/87a7428bb5fe5d85da478cb6edb20d94.png" alt="file"></p>
+<h6 id="上面这个表算出的是余弦相似度的分子。这里N-u-是用户喜欢的物品的集合，S-j-K-是和物品j最相似的K个物品的集合，wji是物品j和i-的相似度，rui是用户u对物品i的兴趣"><a href="#上面这个表算出的是余弦相似度的分子。这里N-u-是用户喜欢的物品的集合，S-j-K-是和物品j最相似的K个物品的集合，wji是物品j和i-的相似度，rui是用户u对物品i的兴趣" class="headerlink" title="上面这个表算出的是余弦相似度的分子。这里N(u)是用户喜欢的物品的集合，S(j,K)是和物品j最相似的K个物品的集合，wji是物品j和i 的相似度，rui是用户u对物品i的兴趣"></a>上面这个表算出的是余弦相似度的分子。这里N(u)是用户喜欢的物品的集合，S(j,K)是和物品j最相似的K个物品的集合，wji是物品j和i 的相似度，rui是用户u对物品i的兴趣<img src="https://static-cdn.verystar.net/s/pay/verydoc/pic/20190613/e6bb37e85701940581bb654aeb1f15b4.png" alt="file"></h6><h6 id="基于物品和用户的推荐比较"><a href="#基于物品和用户的推荐比较" class="headerlink" title="基于物品和用户的推荐比较"></a>基于物品和用户的推荐比较</h6><p><img src="https://static-cdn.verystar.net/s/pay/verydoc/pic/20190614/6298dce8df0e048dfb008884353a2052.png" alt="file"></p>
+</blockquote>
+<blockquote>
+<h4 id="隐语意模型"><a href="#隐语意模型" class="headerlink" title="隐语意模型"></a>隐语意模型</h4><h6 id="隐语意模型主要是找到用户和物品的隐含关系"><a href="#隐语意模型主要是找到用户和物品的隐含关系" class="headerlink" title="隐语意模型主要是找到用户和物品的隐含关系"></a>隐语意模型主要是找到用户和物品的隐含关系</h6></blockquote>
+<blockquote>
+<h4 id="基于图的推荐"><a href="#基于图的推荐" class="headerlink" title="基于图的推荐"></a>基于图的推荐</h4><h6 id="假设用户和物品在空间中生成了一张二部图，图中的顶点分为用户和物品两个子集，图中的边是用户和物品的行为，用图做推荐，其实就是计算两个顶点之间的相关性。"><a href="#假设用户和物品在空间中生成了一张二部图，图中的顶点分为用户和物品两个子集，图中的边是用户和物品的行为，用图做推荐，其实就是计算两个顶点之间的相关性。" class="headerlink" title="假设用户和物品在空间中生成了一张二部图，图中的顶点分为用户和物品两个子集，图中的边是用户和物品的行为，用图做推荐，其实就是计算两个顶点之间的相关性。"></a>假设用户和物品在空间中生成了一张二部图，图中的顶点分为用户和物品两个子集，图中的边是用户和物品的行为，用图做推荐，其实就是计算两个顶点之间的相关性。</h6><h6 id="一般图中顶点的相关性主要取决于："><a href="#一般图中顶点的相关性主要取决于：" class="headerlink" title="一般图中顶点的相关性主要取决于："></a>一般图中顶点的相关性主要取决于：</h6><ul>
+<li><h6 id="两个顶点之间的路径数"><a href="#两个顶点之间的路径数" class="headerlink" title="两个顶点之间的路径数"></a>两个顶点之间的路径数</h6></li>
+<li><h6 id="两个顶点之间的长度"><a href="#两个顶点之间的长度" class="headerlink" title="两个顶点之间的长度"></a>两个顶点之间的长度</h6></li>
+<li><h6 id="两个顶点之间的路径经过的顶点"><a href="#两个顶点之间的路径经过的顶点" class="headerlink" title="两个顶点之间的路径经过的顶点"></a>两个顶点之间的路径经过的顶点</h6></li>
+</ul>
+<h6 id="相关性高的一对顶点一般有如下特征："><a href="#相关性高的一对顶点一般有如下特征：" class="headerlink" title="相关性高的一对顶点一般有如下特征："></a>相关性高的一对顶点一般有如下特征：</h6><ul>
+<li><h6 id="两个顶点之间有很多路径相连"><a href="#两个顶点之间有很多路径相连" class="headerlink" title="两个顶点之间有很多路径相连"></a>两个顶点之间有很多路径相连</h6></li>
+<li><h6 id="连接两个顶点之间的路径长度都比较短"><a href="#连接两个顶点之间的路径长度都比较短" class="headerlink" title="连接两个顶点之间的路径长度都比较短"></a>连接两个顶点之间的路径长度都比较短</h6></li>
+<li><h6 id="连接两个顶点之间的路径不会经过度比较大的顶点-度就是与这个顶点相关联的边数"><a href="#连接两个顶点之间的路径不会经过度比较大的顶点-度就是与这个顶点相关联的边数" class="headerlink" title="连接两个顶点之间的路径不会经过度比较大的顶点(度就是与这个顶点相关联的边数)"></a>连接两个顶点之间的路径不会经过度比较大的顶点(度就是与这个顶点相关联的边数)</h6><img src="https://static-cdn.verystar.net/s/pay/verydoc/pic/20190618/258fcc94742fe3816dbd19d786dc0480.png" alt="file"><h6 id="这里拿A点来举例，给A推荐没有过交互的物品c和e，A和c有一条路径相连-A-d-D-c-，A和e有两条路径相连-A-b-C-e-A-d-D-e-，所以物品e的相关性比较高。A和e的第一条路径里每个顶点的边数为-3-2-2-2-第二条路径为-3-2-3-2-，所以第一条路径对A和e相关性的贡献较高。"><a href="#这里拿A点来举例，给A推荐没有过交互的物品c和e，A和c有一条路径相连-A-d-D-c-，A和e有两条路径相连-A-b-C-e-A-d-D-e-，所以物品e的相关性比较高。A和e的第一条路径里每个顶点的边数为-3-2-2-2-第二条路径为-3-2-3-2-，所以第一条路径对A和e相关性的贡献较高。" class="headerlink" title="这里拿A点来举例，给A推荐没有过交互的物品c和e，A和c有一条路径相连(A,d,D,c)，A和e有两条路径相连(A,b,C,e),(A,d,D,e)，所以物品e的相关性比较高。A和e的第一条路径里每个顶点的边数为(3,2,2,2),第二条路径为(3,2,3,2)，所以第一条路径对A和e相关性的贡献较高。"></a>这里拿A点来举例，给A推荐没有过交互的物品c和e，A和c有一条路径相连(A,d,D,c)，A和e有两条路径相连(A,b,C,e),(A,d,D,e)，所以物品e的相关性比较高。A和e的第一条路径里每个顶点的边数为(3,2,2,2),第二条路径为(3,2,3,2)，所以第一条路径对A和e相关性的贡献较高。</h6><h6 id="pagerank：http-blog-jobbole-com-71431"><a href="#pagerank：http-blog-jobbole-com-71431" class="headerlink" title="pagerank：http://blog.jobbole.com/71431/"></a>pagerank：<a href="http://blog.jobbole.com/71431/" target="_blank" rel="noopener">http://blog.jobbole.com/71431/</a></h6><h6 id="personalrank：https-cloud-tencent-com-developer-article-1098856"><a href="#personalrank：https-cloud-tencent-com-developer-article-1098856" class="headerlink" title="personalrank：https://cloud.tencent.com/developer/article/1098856"></a>personalrank：<a href="https://cloud.tencent.com/developer/article/1098856" target="_blank" rel="noopener">https://cloud.tencent.com/developer/article/1098856</a></h6></li>
+</ul>
+</blockquote>
+<h2 id="4-推荐系统冷启动问题"><a href="#4-推荐系统冷启动问题" class="headerlink" title="4.推荐系统冷启动问题"></a>4.推荐系统冷启动问题</h2><blockquote>
+<h4 id="冷启动主要分为三类"><a href="#冷启动主要分为三类" class="headerlink" title="冷启动主要分为三类"></a>冷启动主要分为三类</h4><ul>
+<li><h6 id="用户冷启动：主要是一个新用户，没有他的行为数据和历史数据，如何给他做推荐"><a href="#用户冷启动：主要是一个新用户，没有他的行为数据和历史数据，如何给他做推荐" class="headerlink" title="用户冷启动：主要是一个新用户，没有他的行为数据和历史数据，如何给他做推荐"></a>用户冷启动：主要是一个新用户，没有他的行为数据和历史数据，如何给他做推荐</h6></li>
+<li><h6 id="物品冷启动：主要是解决如何将新品推荐给可能对它有兴趣的用户"><a href="#物品冷启动：主要是解决如何将新品推荐给可能对它有兴趣的用户" class="headerlink" title="物品冷启动：主要是解决如何将新品推荐给可能对它有兴趣的用户"></a>物品冷启动：主要是解决如何将新品推荐给可能对它有兴趣的用户</h6></li>
+<li><h6 id="系统冷启动：解决如何在一个新开发的网站上-设计个性化推荐"><a href="#系统冷启动：解决如何在一个新开发的网站上-设计个性化推荐" class="headerlink" title="系统冷启动：解决如何在一个新开发的网站上,设计个性化推荐"></a>系统冷启动：解决如何在一个新开发的网站上,设计个性化推荐</h6></li>
+</ul>
+<h4 id="利用用户的注册信息：人口统计学-年龄，性别，职业，民族，学历，居住地-，用户兴趣的描述-有的网站注册时会让你打标签或用文字描述兴趣-，从其他网站导入的用户站外的行为-例如其他社交网站的行为数据"><a href="#利用用户的注册信息：人口统计学-年龄，性别，职业，民族，学历，居住地-，用户兴趣的描述-有的网站注册时会让你打标签或用文字描述兴趣-，从其他网站导入的用户站外的行为-例如其他社交网站的行为数据" class="headerlink" title="利用用户的注册信息：人口统计学(年龄，性别，职业，民族，学历，居住地)，用户兴趣的描述(有的网站注册时会让你打标签或用文字描述兴趣)，从其他网站导入的用户站外的行为(例如其他社交网站的行为数据)"></a>利用用户的注册信息：人口统计学(年龄，性别，职业，民族，学历，居住地)，用户兴趣的描述(有的网站注册时会让你打标签或用文字描述兴趣)，从其他网站导入的用户站外的行为(例如其他社交网站的行为数据)</h4><h6 id="获取用户信息，给用户分类，然后给用户推荐该类喜欢的物品"><a href="#获取用户信息，给用户分类，然后给用户推荐该类喜欢的物品" class="headerlink" title="获取用户信息，给用户分类，然后给用户推荐该类喜欢的物品"></a>获取用户信息，给用户分类，然后给用户推荐该类喜欢的物品</h6><h4 id="选择合适的物品启动用户的兴趣"><a href="#选择合适的物品启动用户的兴趣" class="headerlink" title="选择合适的物品启动用户的兴趣"></a>选择合适的物品启动用户的兴趣</h4><h6 id="当用户第一次访问时，让用户为一系列物品打分，然后根据反馈给出个性化推荐，给出的物品要比较热门，具有代表性和区分性，启动物品要有多样性"><a href="#当用户第一次访问时，让用户为一系列物品打分，然后根据反馈给出个性化推荐，给出的物品要比较热门，具有代表性和区分性，启动物品要有多样性" class="headerlink" title="当用户第一次访问时，让用户为一系列物品打分，然后根据反馈给出个性化推荐，给出的物品要比较热门，具有代表性和区分性，启动物品要有多样性"></a>当用户第一次访问时，让用户为一系列物品打分，然后根据反馈给出个性化推荐，给出的物品要比较热门，具有代表性和区分性，启动物品要有多样性</h6><h4 id="利用物品的内容信息"><a href="#利用物品的内容信息" class="headerlink" title="利用物品的内容信息"></a>利用物品的内容信息</h4><h6 id="物品的内容信息是多样的，不同类型的物品有不同的内容信息，例如电影，一般是标题，导演，演员，编剧，剧情，风格，国家，年代。如果是图书，一般包括标题，作者，出版社，正文，分类"><a href="#物品的内容信息是多样的，不同类型的物品有不同的内容信息，例如电影，一般是标题，导演，演员，编剧，剧情，风格，国家，年代。如果是图书，一般包括标题，作者，出版社，正文，分类" class="headerlink" title="物品的内容信息是多样的，不同类型的物品有不同的内容信息，例如电影，一般是标题，导演，演员，编剧，剧情，风格，国家，年代。如果是图书，一般包括标题，作者，出版社，正文，分类"></a>物品的内容信息是多样的，不同类型的物品有不同的内容信息，例如电影，一般是标题，导演，演员，编剧，剧情，风格，国家，年代。如果是图书，一般包括标题，作者，出版社，正文，分类</h6><table>
+<thead>
+<tr>
+<th>图书</th>
+<th>标题、作者、出版社、出版年代、丛书名、目录、正文</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>论文</td>
+<td>标题、作者、作者单位、关键字、分类、摘要、正文</td>
+</tr>
+<tr>
+<td>电影</td>
+<td>标题、导演、演员、编剧、类别、剧情简介、发行公司</td>
+</tr>
+<tr>
+<td>新闻</td>
+<td>标题、正文、来源、作者</td>
+</tr>
+<tr>
+<td>微博</td>
+<td>作者、内容、评论</td>
+</tr>
+</tbody></table>
+<h6 id="物品的内容可以用向量空间模型表示，该模型会将物品表示成一个关键词向量。TF-IDF"><a href="#物品的内容可以用向量空间模型表示，该模型会将物品表示成一个关键词向量。TF-IDF" class="headerlink" title="物品的内容可以用向量空间模型表示，该模型会将物品表示成一个关键词向量。TF-IDF"></a>物品的内容可以用向量空间模型表示，该模型会将物品表示成一个关键词向量。TF-IDF</h6><h6 id="TF-IDF是一种统计方法，用于统计一字词对一个文件集或者一个语料库中的其中一份文件的的重要程度，字词的重要程度随着它在文件中出现的次数成正比，但同时随着在整个语料库中出现的频率成反比。"><a href="#TF-IDF是一种统计方法，用于统计一字词对一个文件集或者一个语料库中的其中一份文件的的重要程度，字词的重要程度随着它在文件中出现的次数成正比，但同时随着在整个语料库中出现的频率成反比。" class="headerlink" title="TF-IDF是一种统计方法，用于统计一字词对一个文件集或者一个语料库中的其中一份文件的的重要程度，字词的重要程度随着它在文件中出现的次数成正比，但同时随着在整个语料库中出现的频率成反比。"></a>TF-IDF是一种统计方法，用于统计一字词对一个文件集或者一个语料库中的其中一份文件的的重要程度，字词的重要程度随着它在文件中出现的次数成正比，但同时随着在整个语料库中出现的频率成反比。</h6><h6 id="词频-term-frequency-TF-指的是某一个给定的词语在该文件中出现的次数，这个数字通常会被归一化，避免偏向长文本，因为长文本的词频更高"><a href="#词频-term-frequency-TF-指的是某一个给定的词语在该文件中出现的次数，这个数字通常会被归一化，避免偏向长文本，因为长文本的词频更高" class="headerlink" title="词频 (term frequency, TF)指的是某一个给定的词语在该文件中出现的次数，这个数字通常会被归一化，避免偏向长文本，因为长文本的词频更高"></a>词频 (term frequency, TF)指的是某一个给定的词语在该文件中出现的次数，这个数字通常会被归一化，避免偏向长文本，因为长文本的词频更高</h6></blockquote>
+<blockquote>
+<h6 id="逆向文件频率-inverse-document-frequency-IDF-一个词语重要性的度量，一般可由总文本数目除以包含该词语的文本数然后取对数得到，这里有考虑到特殊的情况，例如有的生僻词没有在文档中出现所以分母会为0，IDF就没有意义了，所以需要做一些平滑，使语料库没有出现的词也有一个合适的值，后面的-1是避免热词出现在每个文档中，IDF值会为0，导致TF-IDF整个值为0，影响整个算法过程"><a href="#逆向文件频率-inverse-document-frequency-IDF-一个词语重要性的度量，一般可由总文本数目除以包含该词语的文本数然后取对数得到，这里有考虑到特殊的情况，例如有的生僻词没有在文档中出现所以分母会为0，IDF就没有意义了，所以需要做一些平滑，使语料库没有出现的词也有一个合适的值，后面的-1是避免热词出现在每个文档中，IDF值会为0，导致TF-IDF整个值为0，影响整个算法过程" class="headerlink" title="逆向文件频率 (inverse document frequency, IDF)一个词语重要性的度量，一般可由总文本数目除以包含该词语的文本数然后取对数得到，这里有考虑到特殊的情况，例如有的生僻词没有在文档中出现所以分母会为0，IDF就没有意义了，所以需要做一些平滑，使语料库没有出现的词也有一个合适的值，后面的+1是避免热词出现在每个文档中，IDF值会为0，导致TF-IDF整个值为0，影响整个算法过程"></a>逆向文件频率 (inverse document frequency, IDF)一个词语重要性的度量，一般可由总文本数目除以包含该词语的文本数然后取对数得到，这里有考虑到特殊的情况，例如有的生僻词没有在文档中出现所以分母会为0，IDF就没有意义了，所以需要做一些平滑，使语料库没有出现的词也有一个合适的值，后面的+1是避免热词出现在每个文档中，IDF值会为0，导致TF-IDF整个值为0，影响整个算法过程</h6><p><img src="https://static-cdn.verystar.net/s/pay/verydoc/pic/20190619/ca0b284cb31bc02b3e2c63217c3b0dd7.png" alt="file"><br><img src="https://static-cdn.verystar.net/s/pay/verydoc/pic/20190619/566aa7cb9e10076a01a6edd3a67ef6d7.png" alt="file"></p>
+<h6 id="这里没有参考文章的基于内容推荐，参考了另外的文章。上面已经大概讲了TF-IDF原理和算法，这里举例如何计算两个新闻的相似度，我们如何计算两篇文章的相似度呢。我们可以提取两个新闻的关键词，对比两个新闻的关键词是不是相同。"><a href="#这里没有参考文章的基于内容推荐，参考了另外的文章。上面已经大概讲了TF-IDF原理和算法，这里举例如何计算两个新闻的相似度，我们如何计算两篇文章的相似度呢。我们可以提取两个新闻的关键词，对比两个新闻的关键词是不是相同。" class="headerlink" title="这里没有参考文章的基于内容推荐，参考了另外的文章。上面已经大概讲了TF-IDF原理和算法，这里举例如何计算两个新闻的相似度，我们如何计算两篇文章的相似度呢。我们可以提取两个新闻的关键词，对比两个新闻的关键词是不是相同。"></a>这里没有参考文章的基于内容推荐，参考了另外的文章。上面已经大概讲了TF-IDF原理和算法，这里举例如何计算两个新闻的相似度，我们如何计算两篇文章的相似度呢。我们可以提取两个新闻的关键词，对比两个新闻的关键词是不是相同。</h6><h6 id="这里提供了一个思路，首先，建立一个用户喜好表，用户每看一篇新闻，我们就通过TF-IDF算出这篇新闻的”word-value”，然后插入用户喜好表，已经在喜好表里的词直接累加这个值，这样我们算出要推荐的新闻的”word-value”-然后取两篇文章重复关键词的集合，将TF-IDF值累加，即为相似度"><a href="#这里提供了一个思路，首先，建立一个用户喜好表，用户每看一篇新闻，我们就通过TF-IDF算出这篇新闻的”word-value”，然后插入用户喜好表，已经在喜好表里的词直接累加这个值，这样我们算出要推荐的新闻的”word-value”-然后取两篇文章重复关键词的集合，将TF-IDF值累加，即为相似度" class="headerlink" title="这里提供了一个思路，首先，建立一个用户喜好表，用户每看一篇新闻，我们就通过TF-IDF算出这篇新闻的”word-value”，然后插入用户喜好表，已经在喜好表里的词直接累加这个值，这样我们算出要推荐的新闻的”word_value”,然后取两篇文章重复关键词的集合，将TF-IDF值累加，即为相似度"></a>这里提供了一个思路，首先，建立一个用户喜好表，用户每看一篇新闻，我们就通过TF-IDF算出这篇新闻的”word-value”，然后插入用户喜好表，已经在喜好表里的词直接累加这个值，这样我们算出要推荐的新闻的”word_value”,然后取两篇文章重复关键词的集合，将TF-IDF值累加，即为相似度</h6><h6 id="兴趣衰减：上面根据每篇新闻算出的”word-value”得到的用户喜好表可能在一段时间后，用户对某一类新闻没有兴趣里，导致该关键词一直在表里，这会导致我算相似度是会有影响，这里引入一个衰减机制0-lt-λ-lt-1系数，每隔一段时间，对每个关键词进行-λ衰减，当达到一个阈值之后直接将关键词删掉"><a href="#兴趣衰减：上面根据每篇新闻算出的”word-value”得到的用户喜好表可能在一段时间后，用户对某一类新闻没有兴趣里，导致该关键词一直在表里，这会导致我算相似度是会有影响，这里引入一个衰减机制0-lt-λ-lt-1系数，每隔一段时间，对每个关键词进行-λ衰减，当达到一个阈值之后直接将关键词删掉" class="headerlink" title="兴趣衰减：上面根据每篇新闻算出的”word-value”得到的用户喜好表可能在一段时间后，用户对某一类新闻没有兴趣里，导致该关键词一直在表里，这会导致我算相似度是会有影响，这里引入一个衰减机制0<λ<1系数，每隔一段时间，对每个关键词进行*λ衰减，当达到一个阈值之后直接将关键词删掉"></a>兴趣衰减：上面根据每篇新闻算出的”word-value”得到的用户喜好表可能在一段时间后，用户对某一类新闻没有兴趣里，导致该关键词一直在表里，这会导致我算相似度是会有影响，这里引入一个衰减机制0&lt;λ&lt;1系数，每隔一段时间，对每个关键词进行*λ衰减，当达到一个阈值之后直接将关键词删掉</h6><h6 id="https-blog-csdn-net-qq-32690999-article-details-77434381"><a href="#https-blog-csdn-net-qq-32690999-article-details-77434381" class="headerlink" title="https://blog.csdn.net/qq_32690999/article/details/77434381"></a><a href="https://blog.csdn.net/qq_32690999/article/details/77434381" target="_blank" rel="noopener">https://blog.csdn.net/qq_32690999/article/details/77434381</a></h6><h6 id="专家系统"><a href="#专家系统" class="headerlink" title="专家系统"></a>专家系统</h6></blockquote>
+<h2 id="4-利用用户标签数据"><a href="#4-利用用户标签数据" class="headerlink" title="4.利用用户标签数据"></a>4.利用用户标签数据</h2><blockquote>
+<h4 id="标签系统代表应用"><a href="#标签系统代表应用" class="headerlink" title="标签系统代表应用"></a>标签系统代表应用</h4><h4 id="Delicious"><a href="#Delicious" class="headerlink" title="Delicious"></a>Delicious</h4><h6 id="允许用户给互联网上的每个网页打标签，从而通过标签重新组织整个互联网"><a href="#允许用户给互联网上的每个网页打标签，从而通过标签重新组织整个互联网" class="headerlink" title="允许用户给互联网上的每个网页打标签，从而通过标签重新组织整个互联网"></a>允许用户给互联网上的每个网页打标签，从而通过标签重新组织整个互联网</h6><h4 id="CiteULike"><a href="#CiteULike" class="headerlink" title="CiteULike"></a>CiteULike</h4><h6 id="允许用户提交或收藏自己感兴趣的论文并给论文打标签"><a href="#允许用户提交或收藏自己感兴趣的论文并给论文打标签" class="headerlink" title="允许用户提交或收藏自己感兴趣的论文并给论文打标签"></a>允许用户提交或收藏自己感兴趣的论文并给论文打标签</h6><h4 id="Last-fm"><a href="#Last-fm" class="headerlink" title="Last.fm"></a>Last.fm</h4><h6 id="音乐不像文本那样容易分析内容信息，为了在不进行复杂音频分析的情况下获得音乐的内容信息，引入了UGC标签系统，让用户用标签标记音乐和歌手。"><a href="#音乐不像文本那样容易分析内容信息，为了在不进行复杂音频分析的情况下获得音乐的内容信息，引入了UGC标签系统，让用户用标签标记音乐和歌手。" class="headerlink" title="音乐不像文本那样容易分析内容信息，为了在不进行复杂音频分析的情况下获得音乐的内容信息，引入了UGC标签系统，让用户用标签标记音乐和歌手。"></a>音乐不像文本那样容易分析内容信息，为了在不进行复杂音频分析的情况下获得音乐的内容信息，引入了UGC标签系统，让用户用标签标记音乐和歌手。</h6><h4 id="豆瓣"><a href="#豆瓣" class="headerlink" title="豆瓣"></a>豆瓣</h4><h6 id="允许用户对图书和电影打标签，借此获得图书和电影的内容信息和语义"><a href="#允许用户对图书和电影打标签，借此获得图书和电影的内容信息和语义" class="headerlink" title="允许用户对图书和电影打标签，借此获得图书和电影的内容信息和语义"></a>允许用户对图书和电影打标签，借此获得图书和电影的内容信息和语义</h6><h4 id="Hulu"><a href="#Hulu" class="headerlink" title="Hulu"></a>Hulu</h4><h6 id="视频作为一种复杂的多媒体，获取它的内容信息是最困难的，因此也引入了用户标签系统来让用户对电视剧和电影进行标记"><a href="#视频作为一种复杂的多媒体，获取它的内容信息是最困难的，因此也引入了用户标签系统来让用户对电视剧和电影进行标记" class="headerlink" title="视频作为一种复杂的多媒体，获取它的内容信息是最困难的，因此也引入了用户标签系统来让用户对电视剧和电影进行标记"></a>视频作为一种复杂的多媒体，获取它的内容信息是最困难的，因此也引入了用户标签系统来让用户对电视剧和电影进行标记</h6><h4 id="标签系统中的标签分类"><a href="#标签系统中的标签分类" class="headerlink" title="标签系统中的标签分类"></a>标签系统中的标签分类</h4><h6 id="表明物体是什么：例如一只鸟，标签就是鸟，豆瓣首页，标签就是豆瓣"><a href="#表明物体是什么：例如一只鸟，标签就是鸟，豆瓣首页，标签就是豆瓣" class="headerlink" title="表明物体是什么：例如一只鸟，标签就是鸟，豆瓣首页，标签就是豆瓣"></a>表明物体是什么：例如一只鸟，标签就是鸟，豆瓣首页，标签就是豆瓣</h6><h6 id="表明物品的种类：例如为一篇新闻，标签可以是军事，科技"><a href="#表明物品的种类：例如为一篇新闻，标签可以是军事，科技" class="headerlink" title="表明物品的种类：例如为一篇新闻，标签可以是军事，科技"></a>表明物品的种类：例如为一篇新闻，标签可以是军事，科技</h6><h6 id="表明谁拥有物品：博客的作者"><a href="#表明谁拥有物品：博客的作者" class="headerlink" title="表明谁拥有物品：博客的作者"></a>表明谁拥有物品：博客的作者</h6><h6 id="表明用户的观点：funny，boring"><a href="#表明用户的观点：funny，boring" class="headerlink" title="表明用户的观点：funny，boring"></a>表明用户的观点：funny，boring</h6><h6 id="根据标签推荐：这里有了每个用户的标签和每个标签的数量之后，可以用之前的用户相似度，物品相似度，或者TF—IDF做推荐都可以"><a href="#根据标签推荐：这里有了每个用户的标签和每个标签的数量之后，可以用之前的用户相似度，物品相似度，或者TF—IDF做推荐都可以" class="headerlink" title="根据标签推荐：这里有了每个用户的标签和每个标签的数量之后，可以用之前的用户相似度，物品相似度，或者TF—IDF做推荐都可以"></a>根据标签推荐：这里有了每个用户的标签和每个标签的数量之后，可以用之前的用户相似度，物品相似度，或者TF—IDF做推荐都可以</h6></blockquote>
+<h2 id="5-利用上下文信息"><a href="#5-利用上下文信息" class="headerlink" title="5.利用上下文信息"></a>5.利用上下文信息</h2><blockquote>
+<h4 id="上下文，例如时间，天气，地点，等能够影响到用户决策的额外信息"><a href="#上下文，例如时间，天气，地点，等能够影响到用户决策的额外信息" class="headerlink" title="上下文，例如时间，天气，地点，等能够影响到用户决策的额外信息"></a>上下文，例如时间，天气，地点，等能够影响到用户决策的额外信息</h4><h4 id="时间上下文"><a href="#时间上下文" class="headerlink" title="时间上下文"></a>时间上下文</h4><h6 id="用户兴趣是随着时间变化的：关注用户的最近行为最能体现他的兴趣，当然考虑用户最近的兴趣只能针对渐变的用户兴趣，针对用户突变的行为很难起到作用"><a href="#用户兴趣是随着时间变化的：关注用户的最近行为最能体现他的兴趣，当然考虑用户最近的兴趣只能针对渐变的用户兴趣，针对用户突变的行为很难起到作用" class="headerlink" title="用户兴趣是随着时间变化的：关注用户的最近行为最能体现他的兴趣，当然考虑用户最近的兴趣只能针对渐变的用户兴趣，针对用户突变的行为很难起到作用"></a>用户兴趣是随着时间变化的：关注用户的最近行为最能体现他的兴趣，当然考虑用户最近的兴趣只能针对渐变的用户兴趣，针对用户突变的行为很难起到作用</h6><h6 id="物品是有生命周期的：比如一部电影刚上映可能会有很多关注，但是过一段时间可能就被淡忘了，不过电影有可能因为一些事件重新热门起来。又例如你推荐一个几年前的新闻给用户，明显不太合适，除非用户在寻找几年前的新闻。一般来说我们推荐某个物品是要考虑物品当时是否过时。不同的系统物品的生命周期不同，电影的生命周期大于新闻的生命周期"><a href="#物品是有生命周期的：比如一部电影刚上映可能会有很多关注，但是过一段时间可能就被淡忘了，不过电影有可能因为一些事件重新热门起来。又例如你推荐一个几年前的新闻给用户，明显不太合适，除非用户在寻找几年前的新闻。一般来说我们推荐某个物品是要考虑物品当时是否过时。不同的系统物品的生命周期不同，电影的生命周期大于新闻的生命周期" class="headerlink" title="物品是有生命周期的：比如一部电影刚上映可能会有很多关注，但是过一段时间可能就被淡忘了，不过电影有可能因为一些事件重新热门起来。又例如你推荐一个几年前的新闻给用户，明显不太合适，除非用户在寻找几年前的新闻。一般来说我们推荐某个物品是要考虑物品当时是否过时。不同的系统物品的生命周期不同，电影的生命周期大于新闻的生命周期"></a>物品是有生命周期的：比如一部电影刚上映可能会有很多关注，但是过一段时间可能就被淡忘了，不过电影有可能因为一些事件重新热门起来。又例如你推荐一个几年前的新闻给用户，明显不太合适，除非用户在寻找几年前的新闻。一般来说我们推荐某个物品是要考虑物品当时是否过时。不同的系统物品的生命周期不同，电影的生命周期大于新闻的生命周期</h6><h6 id="季节效应：夏天穿T恤，冬天穿棉袄，夏天吃冷饮，冬天喝热饮，还有一些固定的节假日，例如国外的圣诞节，情人节，国内的七夕，中秋，端午"><a href="#季节效应：夏天穿T恤，冬天穿棉袄，夏天吃冷饮，冬天喝热饮，还有一些固定的节假日，例如国外的圣诞节，情人节，国内的七夕，中秋，端午" class="headerlink" title="季节效应：夏天穿T恤，冬天穿棉袄，夏天吃冷饮，冬天喝热饮，还有一些固定的节假日，例如国外的圣诞节，情人节，国内的七夕，中秋，端午"></a>季节效应：夏天穿T恤，冬天穿棉袄，夏天吃冷饮，冬天喝热饮，还有一些固定的节假日，例如国外的圣诞节，情人节，国内的七夕，中秋，端午</h6><h6 id="不同的系统物品生命周期和流行度"><a href="#不同的系统物品生命周期和流行度" class="headerlink" title="不同的系统物品生命周期和流行度"></a>不同的系统物品生命周期和流行度</h6><p><img src="https://static-cdn.verystar.net/s/pay/verydoc/pic/20190711/1e11e8ba9630534fb6d84f2a746d3805.png" alt="file"></p>
+<h6 id="物品流行度度量和平均相似度：取系统中相隔T天的两天，计算这两天的物品流行度，用余弦公式算出这两天的相似度，如果相似度大，说明系统的时效性不强，物品平均在线时间较长，如果相似度小，说明物品发生了较大的变化，系统的时效性较强，物品平均在线时间很短"><a href="#物品流行度度量和平均相似度：取系统中相隔T天的两天，计算这两天的物品流行度，用余弦公式算出这两天的相似度，如果相似度大，说明系统的时效性不强，物品平均在线时间较长，如果相似度小，说明物品发生了较大的变化，系统的时效性较强，物品平均在线时间很短" class="headerlink" title="物品流行度度量和平均相似度：取系统中相隔T天的两天，计算这两天的物品流行度，用余弦公式算出这两天的相似度，如果相似度大，说明系统的时效性不强，物品平均在线时间较长，如果相似度小，说明物品发生了较大的变化，系统的时效性较强，物品平均在线时间很短"></a>物品流行度度量和平均相似度：取系统中相隔T天的两天，计算这两天的物品流行度，用余弦公式算出这两天的相似度，如果相似度大，说明系统的时效性不强，物品平均在线时间较长，如果相似度小，说明物品发生了较大的变化，系统的时效性较强，物品平均在线时间很短</h6><p><img src="https://static-cdn.verystar.net/s/pay/verydoc/pic/20190711/5f8efc0538fabfbbd7f3cf67bcc85657.png" alt="file"><br><img src="https://static-cdn.verystar.net/s/pay/verydoc/pic/20190711/725c6881112fbfeb8494187727ac665b.png" alt="file"><br><img src="https://static-cdn.verystar.net/s/pay/verydoc/pic/20190711/aa15c1107284af788e3e5875ed967589.png" alt="file"></p>
+</blockquote>
+<blockquote>
+<h4 id="地点上下文"><a href="#地点上下文" class="headerlink" title="地点上下文"></a>地点上下文</h4></blockquote>
+<h2 id="6-利用社交网络"><a href="#6-利用社交网络" class="headerlink" title="6.利用社交网络"></a>6.利用社交网络</h2><blockquote>
+<h4 id="基于社交网络的推荐"><a href="#基于社交网络的推荐" class="headerlink" title="基于社交网络的推荐"></a>基于社交网络的推荐</h4><h6 id="好友推荐可以增加推荐信任度"><a href="#好友推荐可以增加推荐信任度" class="headerlink" title="好友推荐可以增加推荐信任度"></a>好友推荐可以增加推荐信任度</h6><h6 id="社交网络可以解决冷启动"><a href="#社交网络可以解决冷启动" class="headerlink" title="社交网络可以解决冷启动"></a>社交网络可以解决冷启动</h6><h6 id="缺点：不一定能提高精度，因为社交网络是基于好友关系，并不是基于用户的兴趣。"><a href="#缺点：不一定能提高精度，因为社交网络是基于好友关系，并不是基于用户的兴趣。" class="headerlink" title="缺点：不一定能提高精度，因为社交网络是基于好友关系，并不是基于用户的兴趣。"></a>缺点：不一定能提高精度，因为社交网络是基于好友关系，并不是基于用户的兴趣。</h6><h4 id="基于邻域的社会化推荐算法"><a href="#基于邻域的社会化推荐算法" class="headerlink" title="基于邻域的社会化推荐算法"></a>基于邻域的社会化推荐算法</h4><h6 id="一般来说，用户更加相信自己熟悉的好友的推荐，因此我们需要考虑用户之间的熟悉度。熟悉度可以用用户之间的共同好友比例来度量。也就是说如果用户u和用户v很熟悉，那么一般来说他们应该有很多共同的好友。"><a href="#一般来说，用户更加相信自己熟悉的好友的推荐，因此我们需要考虑用户之间的熟悉度。熟悉度可以用用户之间的共同好友比例来度量。也就是说如果用户u和用户v很熟悉，那么一般来说他们应该有很多共同的好友。" class="headerlink" title="一般来说，用户更加相信自己熟悉的好友的推荐，因此我们需要考虑用户之间的熟悉度。熟悉度可以用用户之间的共同好友比例来度量。也就是说如果用户u和用户v很熟悉，那么一般来说他们应该有很多共同的好友。"></a>一般来说，用户更加相信自己熟悉的好友的推荐，因此我们需要考虑用户之间的熟悉度。熟悉度可以用用户之间的共同好友比例来度量。也就是说如果用户u和用户v很熟悉，那么一般来说他们应该有很多共同的好友。</h6><h6 id="除了熟悉程度，还需要考虑用户之间的兴趣相似度。我们都和父母很熟悉-但很多时候我们和父母的兴趣却不相似，因此也不会喜欢他们喜欢的物品。"><a href="#除了熟悉程度，还需要考虑用户之间的兴趣相似度。我们都和父母很熟悉-但很多时候我们和父母的兴趣却不相似，因此也不会喜欢他们喜欢的物品。" class="headerlink" title="除了熟悉程度，还需要考虑用户之间的兴趣相似度。我们都和父母很熟悉,但很多时候我们和父母的兴趣却不相似，因此也不会喜欢他们喜欢的物品。"></a>除了熟悉程度，还需要考虑用户之间的兴趣相似度。我们都和父母很熟悉,但很多时候我们和父母的兴趣却不相似，因此也不会喜欢他们喜欢的物品。</h6><p><img src="https://static-cdn.verystar.net/s/pay/verydoc/pic/20190711/f046060e2898a19d0f3bc3957600abdb.png" alt="file"></p>
+</blockquote>
+<p>信息熵 H 单位比特 一件事物的不确定性，<br>信息的度量，减少不确定性 事物的微观态 = 1/p * log2 ^ 1/p </p>
+<p><img src="https://static-cdn.verystar.net/s/pay/verydoc/pic/20190711/f183f75188c25d0dac880553d4c2c43e.png" alt="file"></p>
+<p><img src="https://static-cdn.verystar.net/s/pay/verydoc/pic/20190711/f878224887a93d2298b2d4dd70b53018.png" alt="file"></p>
+<p>混淆矩阵：<br>    准确率<br>    精确率<br>    召回率</p>
+<p>准确度(Accuracy) = (TP+TN) / (TP+TN+FN+TN)<br>精确度(precision, 或者PPV, positive predictive value) = TP / (TP + FP)<br>召回(recall, 或者敏感度，sensitivity，真阳性率，TPR，True Positive Rate) = TP / (TP + FN)<br>F1 = 2 * (precision) * recall/(precision+recall)</p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>Yes</th>
+<th>No</th>
+<th>预测值</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Yes</td>
+<td>TP = 45</td>
+<td>FN = 5</td>
+<td>P = 50</td>
+</tr>
+<tr>
+<td>No</td>
+<td>FP =  0</td>
+<td>TN = 50</td>
+<td>N = 50</td>
+</tr>
+<tr>
+<td>真实值</td>
+<td>P’ = 45</td>
+<td>N’ = 55</td>
+<td>P+N = 100</td>
+</tr>
+</tbody></table>
+<blockquote>
+<p>正确率：(TP+TN )/(P+N)  = 95 /100 = 0.95</p>
+</blockquote>
+<blockquote>
+<p>精  度(precision): TP/(TP+FP) = 45/45 = 1</p>
+</blockquote>
+<blockquote>
+<p>召回率(recall)：TP/P = 45/50 = 0.9</p>
+</blockquote>
+<blockquote>
+<p>F1 = 2 * (precision) * recall/(precision+recall)<br>       = 2 * 1 * 0.9/(1+0.9)<br>       = 0.947</p>
+</blockquote>
+<p><img src="https://static-cdn.verystar.net/s/pay/verydoc/pic/20190711/41e857d803b197c5d9e763a4f8a51145.png" alt="file"></p>
+<script>
+        document.querySelectorAll('.github-emoji')
+          .forEach(el => {
+            if (!el.dataset.src) { return; }
+            const img = document.createElement('img');
+            img.style = 'display:none !important;';
+            img.src = el.dataset.src;
+            img.addEventListener('error', () => {
+              img.remove();
+              el.style.color = 'inherit';
+              el.style.backgroundImage = 'none';
+              el.style.background = 'none';
+            });
+            img.addEventListener('load', () => {
+              img.remove();
+            });
+            document.body.appendChild(img);
+          });
+      </script>
+            </div>
+            <hr/>
+
+            
+
+    <div class="reprint" id="reprint-statement">
+        
+            <div class="reprint__author">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-user">
+                        文章作者:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="https//very-man.github.io" rel="external nofollow noreferrer">孙亮亮</a>
+                </span>
+            </div>
+            <div class="reprint__type">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-link">
+                        文章链接:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="https//very-man.github.io/2019/11/05/tuijian-system/">https//very-man.github.io/2019/11/05/tuijian-system/</a>
+                </span>
+            </div>
+            <div class="reprint__notice">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-copyright">
+                        版权声明:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    本博客所有文章除特別声明外，均采用
+                    <a href="https://creativecommons.org/licenses/by/4.0/deed.zh" rel="external nofollow noreferrer" target="_blank">CC BY 4.0</a>
+                    许可协议。转载请注明来源
+                    <a href="https//very-man.github.io" target="_blank">孙亮亮</a>
+                    !
+                </span>
+            </div>
+        
+    </div>
+
+    <script async defer>
+      document.addEventListener("copy", function (e) {
+        let toastHTML = '<span>复制成功，请遵循本文的转载规则</span><button class="btn-flat toast-action" onclick="navToReprintStatement()" style="font-size: smaller">查看</a>';
+        M.toast({html: toastHTML})
+      });
+
+      function navToReprintStatement() {
+        $("html, body").animate({scrollTop: $("#reprint-statement").offset().top - 80}, 800);
+      }
+    </script>
+
+
+
+            <div class="tag_share" style="display: block;">
+                <div class="post-meta__tag-list" style="display: inline-block;">
+                    
+                        <div class="article-tag">
+                            
+                                <a href="/tags/%E6%8E%A8%E8%8D%90%E7%B3%BB%E7%BB%9F/">
+                                    <span class="chip bg-color">推荐系统</span>
+                                </a>
+                            
+                        </div>
+                    
+                </div>
+                <div class="post_share" style="zoom: 80%; width: fit-content; display: inline-block; float: right; margin: -0.15rem 0;">
+                    <link rel="stylesheet" type="text/css" href="/libs/share/css/share.min.css">
+
+<div id="article-share">
+    
+    
+    <div class="social-share" data-sites="twitter,facebook,google,qq,qzone,wechat,weibo,douban,linkedin" data-wechat-qrcode-helper="<p>微信扫一扫即可分享！</p>"></div>
+    <script src="/libs/share/js/social-share.min.js"></script>
+    
+
+    
+
+</div>
+
+                </div>
+            </div>
+            
+                <style>
+    #reward {
+        margin: 40px 0;
+        text-align: center;
+    }
+
+    #reward .reward-link {
+        font-size: 1.4rem;
+        line-height: 38px;
+    }
+
+    #reward .btn-floating:hover {
+        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2), 0 5px 15px rgba(0, 0, 0, 0.2);
+    }
+
+    #rewardModal {
+        width: 320px;
+        height: 350px;
+    }
+
+    #rewardModal .reward-title {
+        margin: 15px auto;
+        padding-bottom: 5px;
+    }
+
+    #rewardModal .modal-content {
+        padding: 10px;
+    }
+
+    #rewardModal .close {
+        position: absolute;
+        right: 15px;
+        top: 15px;
+        color: rgba(0, 0, 0, 0.5);
+        font-size: 1.3rem;
+        line-height: 20px;
+        cursor: pointer;
+    }
+
+    #rewardModal .close:hover {
+        color: #ef5350;
+        transform: scale(1.3);
+        -moz-transform:scale(1.3);
+        -webkit-transform:scale(1.3);
+        -o-transform:scale(1.3);
+    }
+
+    #rewardModal .reward-tabs {
+        margin: 0 auto;
+        width: 210px;
+    }
+
+    .reward-tabs .tabs {
+        height: 38px;
+        margin: 10px auto;
+        padding-left: 0;
+    }
+
+    .reward-content ul {
+        padding-left: 0 !important;
+    }
+
+    .reward-tabs .tabs .tab {
+        height: 38px;
+        line-height: 38px;
+    }
+
+    .reward-tabs .tab a {
+        color: #fff;
+        background-color: #ccc;
+    }
+
+    .reward-tabs .tab a:hover {
+        background-color: #ccc;
+        color: #fff;
+    }
+
+    .reward-tabs .wechat-tab .active {
+        color: #fff !important;
+        background-color: #22AB38 !important;
+    }
+
+    .reward-tabs .alipay-tab .active {
+        color: #fff !important;
+        background-color: #019FE8 !important;
+    }
+
+    .reward-tabs .reward-img {
+        width: 210px;
+        height: 210px;
+    }
+</style>
+
+<div id="reward">
+    <a href="#rewardModal" class="reward-link modal-trigger btn-floating btn-medium waves-effect waves-light red">赏</a>
+
+    <!-- Modal Structure -->
+    <div id="rewardModal" class="modal">
+        <div class="modal-content">
+            <a class="close modal-close"><i class="fas fa-times"></i></a>
+            <h4 class="reward-title">你的赏识是我前进的动力</h4>
+            <div class="reward-content">
+                <div class="reward-tabs">
+                    <ul class="tabs row">
+                        <li class="tab col s6 alipay-tab waves-effect waves-light"><a href="#alipay">支付宝</a></li>
+                        <li class="tab col s6 wechat-tab waves-effect waves-light"><a href="#wechat">微 信</a></li>
+                    </ul>
+                    <div id="alipay">
+                        <img src="/medias/reward/alipay.jpg" class="reward-img" alt="支付宝打赏二维码">
+                    </div>
+                    <div id="wechat">
+                        <img src="/medias/reward/wechat.png" class="reward-img" alt="微信打赏二维码">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    $(function () {
+        $('.tabs').tabs();
+    });
+</script>
+            
+        </div>
+    </div>
+
+    
+        <link rel="stylesheet" href="/libs/gitalk/gitalk.css">
+<link rel="stylesheet" href="/css/my-gitalk.css">
+
+<div class="card gitalk-card" data-aos="fade-up">
+    <div class="comment_headling" style="font-size: 20px; font-weight: 700; position: relative; left: 20px; top: 15px; padding-bottom: 5px;">
+        <i class="fas fa-comments fa-fw" aria-hidden="true"></i>
+        <span>评论</span>
+    </div>
+    <div id="gitalk-container" class="card-content"></div>
+</div>
+
+<script src="/libs/gitalk/gitalk.min.js"></script>
+<script>
+    let gitalk = new Gitalk({
+        clientID: '144a938f2655c7cc516d',
+        clientSecret: 'de6e8827828cf72fd2b4254880e7c9e861b82d98',
+        repo: 'very-man.github.io',
+        owner: 'very-man',
+        admin: "very-man",
+        id: '2019-11-05T20-49-59',
+        distractionFreeMode: false  // Facebook-like distraction free mode
+    });
+
+    gitalk.render('gitalk-container');
+</script>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+<article id="prenext-posts" class="prev-next articles">
+    <div class="row article-row">
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge left-badge text-color">
+                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+            <div class="card">
+                <a href="/2019/11/05/new-blog/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/featureimages/12.jpg" class="responsive-img" alt="Hello World">
+                        
+                        <span class="card-title">Hello World</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hex
+                        
+                    </div>
+                    <div class="publish-info">
+                        <span class="publish-date">
+                            <i class="far fa-clock fa-fw icon-date"></i>2019-11-05
+                        </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/%E9%9A%8F%E7%AC%94/" class="post-category">
+                                    随笔
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/%E6%95%99%E7%A8%8B/">
+                        <span class="chip bg-color">教程</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge right-badge text-color">
+                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
+            </div>
+            <div class="card">
+                <a href="/2019/11/05/hello-world/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/featureimages/12.jpg" class="responsive-img" alt="Hello World">
+                        
+                        <span class="card-title">Hello World</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hex
+                        
+                    </div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2019-11-05
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/%E9%9A%8F%E7%AC%94/" class="post-category">
+                                    随笔
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/%E6%95%99%E7%A8%8B/">
+                        <span class="chip bg-color">教程</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+    </div>
+</article>
+
+</div>
+
+
+
+<!-- 代码块功能依赖 -->
+<script type="text/javascript" src="/libs/codeBlock/codeBlockFuction.js"></script>
+
+<!-- 代码语言 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeLang.js"></script>
+
+    
+<!-- 代码块复制 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeCopy.js"></script>
+
+
+<!-- 代码块收缩 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeShrink.js"></script>
+
+
+<!-- 代码块折行 -->
+
+<style type="text/css">
+code[class*="language-"], pre[class*="language-"] { white-space: pre !important; }
+</style>
+
+    </div>
+    <div id="toc-aside" class="expanded col l3 hide-on-med-and-down">
+        <div class="toc-widget">
+            <div class="toc-title"><i class="far fa-list-alt"></i>&nbsp;&nbsp;目录</div>
+            <div id="toc-content"></div>
+        </div>
+    </div>
+</div>
+
+<!-- TOC 悬浮按钮. -->
+
+<div id="floating-toc-btn" class="hide-on-med-and-down">
+    <a class="btn-floating btn-large bg-color">
+        <i class="fas fa-list-ul"></i>
+    </a>
+</div>
+
+
+<script src="/libs/tocbot/tocbot.min.js"></script>
+<script>
+    $(function () {
+        tocbot.init({
+            tocSelector: '#toc-content',
+            contentSelector: '#articleContent',
+            headingsOffset: -($(window).height() * 0.4 - 45),
+            // headingsOffset: -205,
+            headingSelector: 'h2, h3, h4'
+        });
+
+        // modify the toc link href to support Chinese.
+        let i = 0;
+        let tocHeading = 'toc-heading-';
+        $('#toc-content a').each(function () {
+            $(this).attr('href', '#' + tocHeading + (++i));
+        });
+
+        // modify the heading title id to support Chinese.
+        i = 0;
+        $('#articleContent').children('h2, h3, h4').each(function () {
+            $(this).attr('id', tocHeading + (++i));
+        });
+
+        // Set scroll toc fixed.
+        let tocHeight = parseInt($(window).height() * 0.4 - 64);
+        let $tocWidget = $('.toc-widget');
+        $(window).scroll(function () {
+            let scroll = $(window).scrollTop();
+            /* add post toc fixed. */
+            if (scroll > tocHeight) {
+                $tocWidget.addClass('toc-fixed');
+            } else {
+                $tocWidget.removeClass('toc-fixed');
+            }
+        });
+
+        
+        /* 修复文章卡片 div 的宽度. */
+        let fixPostCardWidth = function (srcId, targetId) {
+            let srcDiv = $('#' + srcId);
+            if (srcDiv.length === 0) {
+                return;
+            }
+
+            let w = srcDiv.width();
+            if (w >= 450) {
+                w = w + 21;
+            } else if (w >= 350 && w < 450) {
+                w = w + 18;
+            } else if (w >= 300 && w < 350) {
+                w = w + 16;
+            } else {
+                w = w + 14;
+            }
+            $('#' + targetId).width(w);
+        };
+
+        // 切换TOC目录展开收缩的相关操作.
+        const expandedClass = 'expanded';
+        let $tocAside = $('#toc-aside');
+        let $mainContent = $('#main-content');
+        $('#floating-toc-btn .btn-floating').click(function () {
+            if ($tocAside.hasClass(expandedClass)) {
+                $tocAside.removeClass(expandedClass).hide();
+                $mainContent.removeClass('l9');
+            } else {
+                $tocAside.addClass(expandedClass).show();
+                $mainContent.addClass('l9');
+            }
+            fixPostCardWidth('artDetail', 'prenext-posts');
+        });
+        
+    });
+</script>
+
+    
+
+</main>
+
+
+
+    <footer class="page-footer bg-color">
+    <div class="container row center-align">
+        <div class="col s12 m8 l8 copy-right">
+            
+            &copy; 2019 亮仔. All Rights Reserved.
+
+            
+            &nbsp;<i class="fa fa-area-chart"></i>&nbsp;站点总字数:&nbsp;
+            <span class="white-color">5k</span>
+            
+
+            <br>
+            <span id="sitetime"></span>
+
+            
+            
+            <br>
+            
+            <span id="busuanzi_container_site_pv" style='display:none'>
+                <i class="fa fa-heart-o"></i>
+                本站总访问量 <span id="busuanzi_value_site_pv" class="white-color"></span>
+            </span>
+            
+            
+            <span id="busuanzi_container_site_uv" style='display:none'>
+                人次,&nbsp;访客数 <span id="busuanzi_value_site_uv" class="white-color"></span> 人.
+            </span>
+            
+            
+        </div>
+        <div class="col s12 m4 l4 social-link social-statis">
+    <a href="https://github.com/very-man.github.io" class="tooltipped" target="_blank" data-tooltip="访问我的GitHub" data-position="top" data-delay="50">
+        <i class="fab fa-github"></i>
+    </a>
+
+
+
+    <a href="mailto:1543664734@qq.com" class="tooltipped" target="_blank" data-tooltip="邮件联系我" data-position="top" data-delay="50">
+        <i class="fas fa-envelope-open"></i>
+    </a>
+
+
+
+
+
+
+
+    <a href="tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=1543664734" class="tooltipped" target="_blank" data-tooltip="QQ联系我: 1543664734" data-position="top" data-delay="50">
+        <i class="fab fa-qq"></i>
+    </a>
+
+
+
+
+
+
+
+</div>
+    </div>
+</footer>
+
+<div class="progress-bar"></div>
+
+<!-- 不蒜子计数初始值纠正 -->
+<script>
+    $(document).ready(function () {
+
+        var int = setInterval(fixCount, 50);
+        var pvcountOffset = 100;
+        var uvcountOffset = 200;
+
+        function fixCount() {
+            if (document.getElementById("busuanzi_container_site_pv").style.display != "none") {
+                $("#busuanzi_value_site_pv").html(parseInt($("#busuanzi_value_site_pv").html()) + pvcountOffset);
+                clearInterval(int);
+            }
+            if ($("#busuanzi_container_site_pv").css("display") != "none") {
+                $("#busuanzi_value_site_uv").html(parseInt($("#busuanzi_value_site_uv").html()) + uvcountOffset); // 加上初始数据 
+                clearInterval(int);
+            }
+        }
+    });
+</script>
+
+<script language=javascript>
+    function siteTime() {
+        window.setTimeout("siteTime()", 1000);
+        var seconds = 1000;
+        var minutes = seconds * 60;
+        var hours = minutes * 60;
+        var days = hours * 24;
+        var years = days * 365;
+        var today = new Date();
+        var todayYear = today.getFullYear();
+        var todayMonth = today.getMonth() + 1;
+        var todayDate = today.getDate();
+        var todayHour = today.getHours();
+        var todayMinute = today.getMinutes();
+        var todaySecond = today.getSeconds();
+        /* Date.UTC() -- 返回date对象距世界标准时间(UTC)1970年1月1日午夜之间的毫秒数(时间戳)
+        year - 作为date对象的年份，为4位年份值
+        month - 0-11之间的整数，做为date对象的月份
+        day - 1-31之间的整数，做为date对象的天数
+        hours - 0(午夜24点)-23之间的整数，做为date对象的小时数
+        minutes - 0-59之间的整数，做为date对象的分钟数
+        seconds - 0-59之间的整数，做为date对象的秒数
+        microseconds - 0-999之间的整数，做为date对象的毫秒数 */
+        var t1 = Date.UTC(2019, 11, 5, 00, 00, 00); //北京时间2018-2-13 00:00:00
+        var t2 = Date.UTC(todayYear, todayMonth, todayDate, todayHour, todayMinute, todaySecond);
+        var diff = t2 - t1;
+        var diffYears = Math.floor(diff / years);
+        var diffDays = Math.floor((diff / days) - diffYears * 365);
+        var diffHours = Math.floor((diff - (diffYears * 365 + diffDays) * days) / hours);
+        var diffMinutes = Math.floor((diff - (diffYears * 365 + diffDays) * days - diffHours * hours) / minutes);
+        var diffSeconds = Math.floor((diff - (diffYears * 365 + diffDays) * days - diffHours * hours - diffMinutes * minutes) / seconds);
+        document.getElementById("sitetime").innerHTML = "本站已运行 " + diffYears + " 年 " + diffDays + " 天 " + diffHours + " 小时 " + diffMinutes + " 分钟 " + diffSeconds + " 秒";
+    }/*因为建站时间还没有一年，就将之注释掉了。需要的可以取消*/
+    siteTime();
+</script>
+
+
+    <!-- 搜索遮罩框 -->
+<div id="searchModal" class="modal">
+    <div class="modal-content">
+        <div class="search-header">
+            <span class="title"><i class="fas fa-search"></i>&nbsp;&nbsp;搜索</span>
+            <input type="search" id="searchInput" name="s" placeholder="请输入搜索的关键字"
+                   class="search-input">
+        </div>
+        <div id="searchResult"></div>
+    </div>
+</div>
+
+<script src="/js/search.js"></script>
+<script type="text/javascript">
+$(function () {
+    searchFunc("/" + "search.xml", 'searchInput', 'searchResult');
+});
+</script>
+    <!-- 回到顶部按钮 -->
+<div id="backTop" class="top-scroll">
+    <a class="btn-floating btn-large waves-effect waves-light" href="#!">
+        <i class="fas fa-arrow-up"></i>
+    </a>
+</div>
+
+
+    <script src="/libs/materialize/materialize.min.js"></script>
+    <script src="/libs/masonry/masonry.pkgd.min.js"></script>
+    <script src="/libs/aos/aos.js"></script>
+    <script src="/libs/scrollprogress/scrollProgress.min.js"></script>
+    <script src="/libs/lightGallery/js/lightgallery-all.min.js"></script>
+    <script src="/js/matery.js"></script>
+    <!-- 雪花特效 -->
+    
+    <script type="text/javascript" src="/libs/others/snow.js"></script> 
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+
+
+    <!-- Baidu Analytics -->
+
+    <!-- Baidu Push -->
+
+<script>
+    (function () {
+        var bp = document.createElement('script');
+        var curProtocol = window.location.protocol.split(':')[0];
+        if (curProtocol === 'https') {
+            bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+        } else {
+            bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+        }
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(bp, s);
+    })();
+</script>
+
+    
+    <script src="/libs/others/clicklove.js" async="async"></script>
+    
+    
+    <script async src="/libs/others/busuanzi.pure.mini.js"></script>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <script type="text/javascript" src="/libs/background/ribbon-dynamic.js" async="async"></script>
+    
+    
+    
+    <script src="/libs/instantpage/instantpage.js" type="module"></script>
+    
+
+</body>
+
+</html>
