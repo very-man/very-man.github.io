@@ -4,28 +4,10 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="mysql, 孙亮亮的博客">
-    <meta name="description" content="3.4. mysql字段规范数值类型
+    <meta name="keywords" content="常用图表, 孙亮亮的博客">
+    <meta name="description" content="看一下代表两种思维的场景。
 
-
-整数类型
-字节
-范围（有符号）
-范围（无符号）
-用途
-
-
-
-TINYINT
-1 字节
-(-128，127)
-(0，255)
-小整数值
-
-
-SMALLINT
-2 字节
-(-32 768，32 767)">
+我们12月的销售额度下降，我想是因为年终的影响，我问了几个销售员，他们都说年终生意不太好做，各家都收紧了财务预算，谈下的几家费用也比以前有缩水。我对他们进行了电话拜访，厂家都说经济不景气，希望我们价格方面再放宽">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -33,7 +15,7 @@ SMALLINT
     <meta name="format-detection" content="telephone=no">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <title>mysql | 孙亮亮的博客</title>
+    <title>常用图表 | 孙亮亮的博客</title>
     <link rel="icon" type="image/png" href="/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
@@ -330,7 +312,7 @@ SMALLINT
             <div class="col s12 m12 l12">
                 <div class="brand">
                     <div class="description center-align post-title">
-                        mysql
+                        常用图表
                     </div>
                 </div>
             </div>
@@ -442,8 +424,8 @@ SMALLINT
                     
                     <div class="article-tag">
                         
-                            <a href="/tags/mysql/">
-                                <span class="chip bg-color">mysql</span>
+                            <a href="/tags/%E5%9B%BE%E8%A1%A8/">
+                                <span class="chip bg-color">图表</span>
                             </a>
                         
                     </div>
@@ -454,8 +436,8 @@ SMALLINT
                     <div class="post-cate">
                         <i class="fas fa-bookmark fa-fw icon-category"></i>
                         
-                            <a href="/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/" class="post-category">
-                                数据库
+                            <a href="/categories/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/" class="post-category">
+                                数据分析
                             </a>
                         
                     </div>
@@ -467,7 +449,7 @@ SMALLINT
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2019-11-05
+                    2019-11-07
                 </div>
                 
 
@@ -483,7 +465,7 @@ SMALLINT
                 
                 <div class="info-break-policy">
                     <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                    9 分
+                    6 分
                 </div>
                 
 				
@@ -499,324 +481,52 @@ SMALLINT
         <hr class="clearfix">
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h1 id="3-4-mysql"><a href="#3-4-mysql" class="headerlink" title="3.4. mysql"></a>3.4. mysql</h1><h2 id="字段规范"><a href="#字段规范" class="headerlink" title="字段规范"></a>字段规范</h2><h3 id="数值类型"><a href="#数值类型" class="headerlink" title="数值类型"></a>数值类型</h3><table>
-<thead>
-<tr>
-<th>整数类型</th>
-<th>字节</th>
-<th>范围（有符号）</th>
-<th>范围（无符号）</th>
-<th>用途</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>TINYINT</td>
-<td>1 字节</td>
-<td>(-128，127)</td>
-<td>(0，255)</td>
-<td>小整数值</td>
-</tr>
-<tr>
-<td>SMALLINT</td>
-<td>2 字节</td>
-<td>(-32 768，32 767)</td>
-<td>(0，65 535)</td>
-<td>大整数值</td>
-</tr>
-<tr>
-<td>MEDIUMINT</td>
-<td>3 字节</td>
-<td>(-8 388 608，8 388 607)</td>
-<td>(0，16 777 215)</td>
-<td>大整数值</td>
-</tr>
-<tr>
-<td>INT或INTEGER</td>
-<td>4 字节</td>
-<td>(-2 147 483 648，2 147 483 647)</td>
-<td>(0，4 294 967 295)</td>
-<td>大整数值</td>
-</tr>
-<tr>
-<td>BIGINT</td>
-<td>8 字节</td>
-<td>(-9 233 372 036 854 775 808，9 223 372 036 854 775 807)</td>
-<td>(0，18 446 744 073 709 551 615)</td>
-<td>极大整数值</td>
-</tr>
-<tr>
-<td>FLOAT</td>
-<td>4 字节</td>
-<td>(-3.402 823 466 E+38，-1.175 494 351 E-38)，0，(1.175 494 351 E-38，3.402 823 466 351 E+38)</td>
-<td>0，(1.175 494 351 E-38，3.402 823 466 E+38)</td>
-<td>单精度浮点数值</td>
-</tr>
-<tr>
-<td>DOUBLE</td>
-<td>8 字节</td>
-<td>(-1.797 693 134 862 315 7 E+308，-2.225 073 858 507 201 4 E-308)，0，(2.225 073 858 507 201 4 E-308，1.797 693 134 862 315 7 E+308)</td>
-<td>0，(2.225 073 858 507 201 4 E-308，1.797 693 134 862 315 7 E+308)</td>
-<td>双精度浮点数值</td>
-</tr>
-<tr>
-<td>DECIMAL</td>
-<td>对DECIMAL(M,D) ，如果M&gt;D，为M+2否则为D+2</td>
-<td>依赖于M和D的值</td>
-<td>依赖于M和D的值</td>
-<td>小数值</td>
-</tr>
-</tbody></table>
-<h3 id="日期和时间类型"><a href="#日期和时间类型" class="headerlink" title="日期和时间类型"></a>日期和时间类型</h3><table>
-<thead>
-<tr>
-<th>类型</th>
-<th>字节</th>
-<th>范围</th>
-<th>格式</th>
-<th>用途</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>DATE</td>
-<td>3</td>
-<td>1000-01-01/9999-12-31</td>
-<td>YYYY-MM-DD</td>
-<td>日期值</td>
-</tr>
-<tr>
-<td>TIME</td>
-<td>3</td>
-<td>‘-838:59:59’/‘838:59:59’</td>
-<td>HH:MM:SS</td>
-<td>时间值或持续时间</td>
-</tr>
-<tr>
-<td>YEAR</td>
-<td>1</td>
-<td>1901/2155</td>
-<td>YYYY</td>
-<td>年份值</td>
-</tr>
-<tr>
-<td>DATETIME</td>
-<td>8</td>
-<td>1000-01-01 00:00:00/9999-12-31 23:59:59</td>
-<td>YYYY-MM-DD HH:MM:SS</td>
-<td>混合日期和时间值</td>
-</tr>
-<tr>
-<td>TIMESTAMP</td>
-<td>4</td>
-<td>1970-01-01 00:00:00/2037 年某时</td>
-<td>YYYYMMDD HHMMSS</td>
-<td>混合日期和时间值，时间戳</td>
-</tr>
-</tbody></table>
-<h3 id="字符串类型"><a href="#字符串类型" class="headerlink" title="字符串类型"></a>字符串类型</h3><table>
-<thead>
-<tr>
-<th>类型</th>
-<th>大小</th>
-<th>用途</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>CHAR</td>
-<td>0-255字节</td>
-<td>定长字符串</td>
-</tr>
-<tr>
-<td>VARCHAR</td>
-<td>0-65535 字节</td>
-<td>变长字符串</td>
-</tr>
-<tr>
-<td>TINYBLOB</td>
-<td>0-255字节</td>
-<td>不超过 255 个字符的二进制字符串</td>
-</tr>
-<tr>
-<td>TINYTEXT</td>
-<td>0-255字节</td>
-<td>短文本字符串</td>
-</tr>
-<tr>
-<td>BLOB</td>
-<td>0-65 535字节</td>
-<td>二进制形式的长文本数据</td>
-</tr>
-<tr>
-<td>TEXT</td>
-<td>0-65 535字节</td>
-<td>长文本数据</td>
-</tr>
-<tr>
-<td>MEDIUMBLOB</td>
-<td>0-16 777 215字节</td>
-<td>二进制形式的中等长度文本数据</td>
-</tr>
-<tr>
-<td>MEDIUMTEXT</td>
-<td>0-16 777 215字节</td>
-<td>中等长度文本数据</td>
-</tr>
-<tr>
-<td>LONGBLOB</td>
-<td>0-4 294 967 295字节</td>
-<td>二进制形式的极大文本数据</td>
-</tr>
-<tr>
-<td>LONGTEXT</td>
-<td>0-4 294 967 295字节</td>
-<td>极大文本数据</td>
-</tr>
-</tbody></table>
-<h2 id="操作规范"><a href="#操作规范" class="headerlink" title="操作规范"></a>操作规范</h2><ol>
-<li>1、SQL语句必须使用预绑定操作，不允许用变量拼接SQL，例如：select name from user where level = :level</li>
-<li>2、查询时如果确定只有一条记录，要加上limit 1，例如：select name from user where uid = :uid limit 1</li>
-<li>3、每张表必须有一个自增字段“id”为 primary key</li>
-<li>4、根据需求合理配置每个字段的数据类型和长度</li>
-<li>5、只有插入操作的表必须要有 create_time 字段记录插入操作的时间，同时有插入和更新操作的表必须要有 create_time 和 update_time 分别记录插入操作的时间和更新操作的时间</li>
-<li>6、每张表必须根据需求合理设置表索引</li>
-<li>7、日志表只允许插入操作,不允许更新操作</li>
-<li>8、尽量减少联表搜索的操作</li>
-<li>9、所有线上活动项目的 DB 写操作必须为异步</li>
-<li>10、所有 SQL 语句在上线前必须通过 explain 指令检查效率,并根据 explain 结果对SQL 语句进行优化<h2 id="存储引擎"><a href="#存储引擎" class="headerlink" title="存储引擎"></a>存储引擎</h2>统一采用Innodb作为存储引擎，MyISAM引擎在写入操作较多的情况下锁表是致命伤 如果你想了解更多关于Innodb的信息，可以阅读如下文章 <a href="http://imysql.com/2014/11/01/mysql-faq-convert-myisam-to-innodb-tips.shtml" target="_blank" rel="noopener">从MyISAM转到InnoDB需要注意什么</a><br><a href="http://imysql.com/2014/11/01/mysql-faq-convert-myisam-to-innodb-tips.shtml" target="_blank" rel="noopener">InnoDB事务隔离级别、行锁、死锁解读</a><h2 id="索引"><a href="#索引" class="headerlink" title="索引"></a>索引</h2></li>
+                <p>看一下代表两种思维的场景。</p>
+<ol>
+<li><p>我们12月的销售额度下降，我想是因为年终的影响，我问了几个销售员，他们都说年终生意不太好做，各家都收紧了财务预算，谈下的几家费用也比以前有缩水。我对他们进行了电话拜访，厂家都说经济不景气，希望我们价格方面再放宽点。</p>
+</li>
+<li><p>我们12月的销售额度下降，低于去年同期和今年平均值，可以排除掉大环境的因素。其中A地区下降幅度最大，间接影响了整体销售额。通过调查发现，A地区的市场因为竞争对手涌入，进行了低价销售策略。除此之外，B地区的经济发展低于预期发展，企业缩减投入。</p>
+</li>
 </ol>
-<ul>
-<li>每张表必须拥有主键唯一索引</li>
-<li>合理的设置索引，比如微信用户表</li>
-</ul>
-<pre><code>+----------------+---------------------+------+-----+---------+----------------+
-| Field          | Type                | Null | Key | Default | Extra          |
-+----------------+---------------------+------+-----+---------+----------------+
-| id             | int(11) unsigned    | NO   | PRI | NULL    | auto_increment |
-| app_id         | varchar(50)         | YES  | MUL | NULL    |                |
-| openid         | varchar(50)         | NO   |     |         |                |
-| subscribe      | tinyint(4) unsigned | NO   |     | NULL    |                |
-| nickname       | tinyblob            | NO   |     | NULL    |                |
-| sex            | tinyint(4)          | YES  |     | NULL    |                |
-| language       | varchar(10)         | YES  |     | NULL    |                |
-| city           | varchar(30)         | YES  |     | NULL    |                |
-| province       | varchar(10)         | YES  |     | NULL    |                |
-| country        | varchar(20)         | YES  |     | NULL    |                |
-| headimgurl     | varchar(200)        | YES  |     | NULL    |                |
-| subscribe_time | int(11)             | YES  |     | NULL    |                |
-| unionid        | varchar(50)         | YES  |     | NULL    |                |
-| update_time    | datetime            | YES  |     | NULL    |                |
-| create_time    | datetime            | YES  |     | NULL    |                |
-+----------------+---------------------+------+-----+---------+----------------+</code></pre><p>其中app_id和openid根据微信文档说明可知一个openid在同一个公众号下一定是唯一的，这里就需要给app_id和openid添加联合唯一索引</p>
-<pre><code>*************************** 2. row ***************************
-        Table: user_info
-   Non_unique: 0
-     Key_name: un_appid_openid
- Seq_in_index: 1
-  Column_name: app_id
-    Collation: A
-  Cardinality: 2
-     Sub_part: NULL
-       Packed: NULL
-         Null: YES
-   Index_type: BTREE
-      Comment:
-Index_comment:
-*************************** 3. row ***************************
-        Table: user_info
-   Non_unique: 0
-     Key_name: un_appid_openid
- Seq_in_index: 2
-  Column_name: openid
-    Collation: A
-  Cardinality: 7426
-     Sub_part: NULL
-       Packed: NULL
-         Null:
-   Index_type: BTREE
-      Comment:
-Index_comment:</code></pre><h2 id="如何合理的设置索引"><a href="#如何合理的设置索引" class="headerlink" title="如何合理的设置索引"></a>如何合理的设置索引</h2><p>一般情况下很容易从业务角度来建立基本的索引，比如需要根据user_name来查询用户信息，那么user_name就需要加上索引，如果需要了解你的sql是否需要添加索引，你可以执行如下语句</p>
-<p><code>EXPLAIN select * from xnfjnhb_reward where hongbao_id = 1</code><br>结果</p>
-<pre><code>+----+-------------+----------------+------+---------------+------+---------+------+--------+-------------+
-| id | select_type | table          | type | possible_keys | key  | key_len | ref  | rows   | Extra       |
-+----+-------------+----------------+------+---------------+------+---------+------+--------+-------------+
-|  1 | SIMPLE      | xnfjnhb_reward | ALL  | NULL          | NULL | NULL    | NULL | 182689 | Using where |
-+----+-------------+----------------+------+---------------+------+---------+------+--------+-------------+</code></pre><p>可以看到rows执行了182689行，Extra指明了Using where需要优化，type为ALL全表扫描</p>
-<p>我们给hongbao_id添加一个索引然后在执行EXPLAIN</p>
-<pre><code>*************************** 2. row ***************************
-        Table: xnfjnhb_reward
-   Non_unique: 1
-     Key_name: idx_hongbao_id
- Seq_in_index: 1
-  Column_name: hongbao_id
-    Collation: A
-  Cardinality: 183991
-     Sub_part: NULL
-       Packed: NULL
-         Null: YES
-   Index_type: BTREE
-      Comment:
-Index_comment:</code></pre><pre><code>+----+-------------+----------------+------+----------------+----------------+---------+-------+------+-------+
-| id | select_type | table          | type | possible_keys  | key            | key_len | ref   | rows | Extra |
-+----+-------------+----------------+------+----------------+----------------+---------+-------+------+-------+
-|  1 | SIMPLE      | xnfjnhb_reward | ref  | idx_hongbao_id | idx_hongbao_id | 5       | const |    1 | NULL  |
-+----+-------------+----------------+------+----------------+----------------+---------+-------+------+-------+</code></pre><p>可以看到type已经走了ref索引，rows瞬间变为了1，Extra也为NULL</p>
-<blockquote>
-<p>我举的这个例子可能并不能看到明显的性能提升，因为数据量还没有达到一定的级别，但是并不能因此就忽略了索引的重要性，因为如果是后期添加索引将是一件困难的事情</p>
-<p>找到一个不太恰当的例子，假如真的有如下SQL语句来看看索引前后的查询速度差别</p>
-</blockquote>
-<pre><code>//索引前
-select count(*),hongbao_id from xnfjnhb_reward group by hongbao_id having count(*) &gt; 1
-5180 rows in set (2.27 sec)</code></pre><pre><code>//索引后
-select count(*),hongbao_id from xnfjnhb_reward group by hongbao_id having count(*) &gt; 1
-5180 rows in set (0.16 sec)</code></pre><p>更多优化技巧你可以阅读下面的文章 <a href="http://imysql.cn/node/35" target="_blank" rel="noopener">MySQL 优化EXPLAIN</a></p>
-<h2 id="在PDO中使用Mysql证书"><a href="#在PDO中使用Mysql证书" class="headerlink" title="在PDO中使用Mysql证书"></a>在PDO中使用Mysql证书</h2><ul>
-<li>如果项目中操作数据库有安全性要求，例如要求连接mysql时必须使用证书，那么就需要在使用PDO时，添加相应的配置项。</li>
-<li></li>
-<li>其中着重注意，如果证书是由服务器端自生成的，那么有可能会引起连接过程中无法验证证书，处理方法类似curl请求https时，忽略证书验证的方法。 而且PDO连接数据库时需要忽略证书的选项(PDO::MYSQL_ATTR_SSL_VERIFY_SERVER_CERT)并没有明文写在PHP官方手册中，而是在手册的评论中被指出：</li>
-</ul>
-<pre><code>There is an important undocumented attribute which disables certificate CN verification available after
-5.6.22 (not sure), 7.0.18 (verified) and 7.1.15 (not sure)
-
-PDO::MYSQL_ATTR_SSL_VERIFY_SERVER_CERT
-
-possible values: true, false
-default value: true 
-
-Related PHP bugs:
-https://bugs.php.net/bug.php?id=71845
-https://bugs.php.net/bug.php?id=71003
-
-and github PR: https://github.com/php/php-src/pull/1913</code></pre><p>综上，示例配置如下：</p>
-<p>yaf项目请修改library/DB.php文件，参考配置如下：</p>
-<pre><code>
-$options = ENVIRONMENT != 'develop' ? [
-        PDO::MYSQL_ATTR_SSL_KEY   =&gt; APPLICATION_PATH."/ssl/".ENVIRONMENT.'/client-key.pem',
-        PDO::MYSQL_ATTR_SSL_CERT  =&gt; APPLICATION_PATH."/ssl/".ENVIRONMENT.'/client-cert.pem',
-        PDO::MYSQL_ATTR_SSL_CA    =&gt; APPLICATION_PATH."/ssl/".ENVIRONMENT.'/cacert.pem',
-        PDO::MYSQL_ATTR_SSL_VERIFY_SERVER_CERT =&gt; false,
-        PDO::ATTR_TIMEOUT =&gt; 1
-    ] : [ PDO::ATTR_TIMEOUT =&gt;1 ];
-$db = new PDO('mysql:host='.$db_config-&gt;host.';dbname='.$db_config-&gt;database, $db_config-&gt;username, $db_config-&gt;password,$options);</code></pre><p>laravel项目请修改config/database.php文件，参考配置如下：</p>
-<pre><code>'mysql' =&gt; [
-    'driver'      =&gt; 'mysql',
-    'host'        =&gt; env('DB_HOST', '127.0.0.1'),
-    'port'        =&gt; env('DB_PORT', '3306'),
-    'database'    =&gt; env('DB_DATABASE', ''),
-    'username'    =&gt; env('DB_USERNAME', ''),
-    'password'    =&gt; env('DB_PASSWORD', ''),
-    'unix_socket' =&gt; env('DB_SOCKET', ''),
-    'charset'     =&gt; 'utf8mb4',
-    'collation'   =&gt; 'utf8mb4_unicode_ci',
-    'prefix'      =&gt; '',
-    'strict'      =&gt; true,
-    'engine'      =&gt; null,
-    'options'     =&gt; ENVIRONMENT != 'develop'?[
-        PDO::MYSQL_ATTR_SSL_KEY   =&gt; base_path("ssl/".ENVIRONMENT.'/client-key.pem'),
-        PDO::MYSQL_ATTR_SSL_CERT  =&gt; base_path("ssl/".ENVIRONMENT.'/client-cert.pem'),
-        PDO::MYSQL_ATTR_SSL_CA    =&gt; base_path("ssl/".ENVIRONMENT.'/cacert.pem'),
-        PDO::MYSQL_ATTR_SSL_VERIFY_SERVER_CERT =&gt; false
-        PDO::ATTR_TIMEOUT =&gt; 1
-    ] : [ PDO::ATTR_TIMEOUT =&gt; 1 ];
-],</code></pre><script>
+<p>第一个==分析思维是依赖经验和直觉的线性思维==，第二个分析思维则==注重逻辑推导，属于结构化的思维==。两种思维往往会导致不同的结果。</p>
+<p>如果没有刻意训练，很多人的思维方式都倾向第一种，以“我觉得我认为”展开。经验主义虽然重要，但不正确的使用也会约束和限制我们。</p>
+<h2 id="运营中典型的金字塔思维（金字塔思维则是总-分-再分）："><a href="#运营中典型的金字塔思维（金字塔思维则是总-分-再分）：" class="headerlink" title="运营中典型的金字塔思维（金字塔思维则是总-分-再分）："></a>运营中典型的金字塔思维（金字塔思维则是总-分-再分）：</h2><ol>
+<li><p>我们活跃用户数在下降（中心论点），主要原因是竞争加剧（分论点），其次原因是新用户减少（分论点），老用户流失加快（分论点）。其中竞争加剧是因为竞争对手ABC出现（论据），新用户减少是ASO排名下降（论据）和渠道投入疲软（论据）造成，老用户流失是因为产品欠佳（论据）。我建议……</p>
+<p> 这是合格运营的结构化思考。如果你把它换成一名初级运营的思考方式：</p>
+</li>
+<li><p>Boss，我发现我们最近的ASO排名下降了不少，渠道投入也减少，导致用户数少了不少。对了，最近产品表现也欠佳，有几家模仿我们的竞争对手出现，对我们造成了影响。这个影响应该会让我们减少一些用户。我建议……</p>
+<p> 这种表达方式就是有什么说什么，想到哪就是哪，接听者的思维方式被无序地牵着鼻子走</p>
+</li>
+</ol>
+<p>绝大多数的商业项目、数据分析、业务讨论，都可以抽象成公式：</p>
+<pre><code>利润 = 销售额 – 成本；
+销售额 = 购买人数 * 转化率 * 客单价；
+购买人数 = 地区A购买人数+地区B购买人数+……
+地区A购买人数 = 地区A新用户 + 地区A老用户；</code></pre><p>举一个具体问题：企业利润下降了，是什么原因？我们就能用公式分解出分论点。</p>
+<p>==是销售额下降了？还是成本上升？==</p>
+<p>==如果是销售额下降，那么是购买人数少了？是客单价下降了？还是购买转化率降低？==</p>
+<p>以此类推，则能形成结构化的分析思路</p>
+<h2 id="不要为分析而分析（使用假设先行）"><a href="#不要为分析而分析（使用假设先行）" class="headerlink" title="不要为分析而分析（使用假设先行）"></a>不要为分析而分析（使用假设先行）</h2><p>什么是假设先行？就是以假设作为思考的起点。我不需要做全局的思考，而是==先问出一个问题，然后思考解决它==：我这款产品的特点在A功能吗？这款产品对用户们很有吸引力吗？我的活动如何在朋友圈引发传播？怎么让用户在活动中更爽？</p>
+<p>在做出假设后，引导思维去挖掘分论点，然后分析。比如我希望活动传播，我要考虑哪些人会传播，他们是因为利益引诱还是情感触动？传播的过程应该什么样，方便还是复杂？这样的分析思维，比堪堪想一个空中楼阁的完美方案靠谱多了。</p>
+<p>分析思维和数据分析不一样，==数据分析追求数据的精确度，而分析思维不需要，只要能回答问题，是和否足够==了。</p>
+<p>假设会被否定或者拒绝，我认为产品对用户有吸引力，但是最后所有的论据，包括留存率、用户使用时长、功能使用率、用户评价都是否定，那么吸引力也就不成立，此时应该修改假设：产品的某一方面有问题，然后继续画新的问题树。</p>
+<h2 id="关键驱动因素是分析的核心，应该聚焦于这些因素"><a href="#关键驱动因素是分析的核心，应该聚焦于这些因素" class="headerlink" title="关键驱动因素是分析的核心，应该聚焦于这些因素"></a>关键驱动因素是分析的核心，应该聚焦于这些因素</h2><p>企业利润的关键驱动因素是利润和成本，用户吸引力的关键驱动因素是留存率。利润和成本还能再找出其中的细分关键因素，留存率也一样。这才是我们要的。</p>
+<p>一旦找到关键驱动因素，可以基于此展开数据调研、取证、分析和结论，而不是对所有问题树开展</p>
+<h3 id="28法则"><a href="#28法则" class="headerlink" title="28法则"></a>28法则</h3><p>在任何一组东西中，最重要的只占其中一小部分，约20%，其余80%尽管是多数，却是次要的。80%的成绩，归功于20%的努力；市场上80%的产品可能是20%的企业生产的；20%的顾客可能给商家带来80%的利润……</p>
+<p>不论你分析企业的利润、还是用户的活跃，只要抓住关键即可。因为一款内容产品，80%的内容一定由核心用户提供；一款电商产品，80%的GMV一定是少部分买买买用户下单。围绕核心关键因素展开的数据分析，是最有效果的。</p>
+<h2 id="正确分析流程"><a href="#正确分析流程" class="headerlink" title="正确分析流程"></a>正确分析流程</h2><p>提出假设—MECE原则（万能公式）—结构化分析—找出关键驱动因素—数据分析</p>
+<h2 id="具体案例"><a href="#具体案例" class="headerlink" title="具体案例"></a>具体案例</h2><p>假设你是一位商业经理，现在有一家中型商场，我希望你对它的经营状况作出分析，你会从哪几个角度展开，列出你的框架。</p>
+<p>既然是针对经营状况作分析，那么核心希望肯定是提高经营，先行假设就是如何提高经营状况。我们用MECE画出问题树。</p>
+<p>先找到万能公式，上文提到过，绝大多数商业活动，都是利润和成本的平衡。</p>
+<p>经营 = 利润-成本</p>
+<p>我们可以通过提高利润，降低成本作为两个分论点展开。我们再考虑有哪些利润，无非是商场各类产品和服务的售卖。它又能拆解出几个公式。</p>
+<p>利润 = 人流 * 转化率 * 客单价</p>
+<p>不同的产品和服务各有不同，人流是固定的，而转化率因为商场的不同产品和服务会划分成ABC的差异。</p>
+<p>利润 = 人流<em>（A转化率</em>A客单价+B转化率*B客单价……）</p>
+<p>成本则考虑房租、资产折旧、人员工资等。是否需要考虑商场贩卖的产品成本？需要的，但是不应该放在这里，因为要遵循MECE原则的完全独立，利润中的客单价已经包含产品这类成本，所以应该归类到利润下。</p>
+<p>再进行深度的结构划分，比如人流各楼层不同，一楼人气最旺，然后依次衰减，那么结构中能不能体现？还有其他分论点吗？都能想想。之后找出问题树的关键驱动因素，并且思考如何提高。</p>
+<p>这是一道开放的分析思维题，答案并不固定。我也并不要求商业知识和商场管理知识多严谨，考察的是能否通过生活中随处可见的商场，通过自己思维去抽象出一套框架。</p>
+<script>
         document.querySelectorAll('.github-emoji')
           .forEach(el => {
             if (!el.dataset.src) { return; }
@@ -859,7 +569,7 @@ $db = new PDO('mysql:host='.$db_config-&gt;host.';dbname='.$db_config-&gt;databa
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="https//very-man.github.io/2019/11/05/new-blog/">https//very-man.github.io/2019/11/05/new-blog/</a>
+                    <a href="https//very-man.github.io/2019/11/07/chang-yong-tu-biao/">https//very-man.github.io/2019/11/07/chang-yong-tu-biao/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -897,8 +607,8 @@ $db = new PDO('mysql:host='.$db_config-&gt;host.';dbname='.$db_config-&gt;databa
                     
                         <div class="article-tag">
                             
-                                <a href="/tags/mysql/">
-                                    <span class="chip bg-color">mysql</span>
+                                <a href="/tags/%E5%9B%BE%E8%A1%A8/">
+                                    <span class="chip bg-color">图表</span>
                                 </a>
                             
                         </div>
@@ -1069,7 +779,7 @@ $db = new PDO('mysql:host='.$db_config-&gt;host.';dbname='.$db_config-&gt;databa
         repo: 'very-man.github.io',
         owner: 'very-man',
         admin: "very-man",
-        id: '2019-11-05T20-49-59',
+        id: '2019-11-07T11-35-02',
         distractionFreeMode: false  // Facebook-like distraction free mode
     });
 
@@ -1090,49 +800,50 @@ $db = new PDO('mysql:host='.$db_config-&gt;host.';dbname='.$db_config-&gt;databa
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+                <i class="far fa-dot-circle"></i>&nbsp;本篇
+            </div>
             <div class="card">
-                <a href="/2019/11/07/hello-world/">
+                <a href="/2019/11/07/chang-yong-tu-biao/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/11.jpg" class="responsive-img" alt="大数据常见名词解释">
+                        <img src="/medias/featureimages/2.jpg" class="responsive-img" alt="常用图表">
                         
-                        <span class="card-title">大数据常见名词解释</span>
+                        <span class="card-title">常用图表</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            
-Yarn 是主流的资源调度系统(Yarn是“Yet Another Resource Negotiator”的缩写，字面意思就是“==另一种资源调度器==”)
+                            看一下代表两种思维的场景。
 
-Yarn主要包括两个重要的部分，一个是资源管理器(resource mana
+我们12月的销售额度下降，我想是因为年终的影响，我问了几个销售员，他们都说年终生意不太好做，各家都收紧了财务预算，谈下的几家费用也比以前有缩水。我对他们进行了电话拜访，厂家都说经济不景气，希望我们价格方面再放宽
                         
                     </div>
                     <div class="publish-info">
-                        <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2019-11-07
-                        </span>
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2019-11-07
+                            </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
                             
-                            <a href="/categories/%E5%A4%A7%E6%95%B0%E6%8D%AE/" class="post-category">
-                                    大数据
+                            <a href="/categories/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/" class="post-category">
+                                    数据分析
                                 </a>
                             
                             
                         </span>
                     </div>
                 </div>
+
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/%E7%A7%91%E6%99%AE/">
-                        <span class="chip bg-color">科普</span>
+                    <a href="/tags/%E5%9B%BE%E8%A1%A8/">
+                        <span class="chip bg-color">图表</span>
                     </a>
                     
                 </div>
@@ -1146,36 +857,33 @@ Yarn主要包括两个重要的部分，一个是资源管理器(resource mana
                 下一篇&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/2019/11/05/tuijian-system/">
+                <a href="/2019/11/07/fen-xi-si-wei-shi-li/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/20.jpg" class="responsive-img" alt="推荐系统">
+                        <img src="/medias/featureimages/10.jpg" class="responsive-img" alt="分析思维实例">
                         
-                        <span class="card-title">推荐系统</span>
+                        <span class="card-title">分析思维实例</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            推荐系统
-推荐算法的本质是通过一定的方式将用户和物品联系起来，而不同的推荐系统利用了不同的方式
-在信息过载的环境中帮助用户发现令他们感兴趣的信息，也能将信息推送给对它们感兴趣的用户
+                            看一下代表两种思维的场景。
 
-1.推荐系统的应用
-电子商务:亚马逊基于物品的推荐 好友
+我们12月的销售额度下降，我想是因为年终的影响，我问了几个销售员，他们都说年终生意不太好做，各家都收紧了财务预算，谈下的几家费用也比以前有缩水。我对他们进行了电话拜访，厂家都说经济不景气，希望我们价格方面再放宽
                         
                     </div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2019-11-05
+                                <i class="far fa-clock fa-fw icon-date"></i>2019-11-07
                             </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
                             
-                            <a href="/categories/%E6%8E%A8%E8%8D%90%E7%B3%BB%E7%BB%9F/" class="post-category">
-                                    推荐系统
+                            <a href="/categories/%E9%9A%8F%E7%AC%94/" class="post-category">
+                                    随笔
                                 </a>
                             
                             
@@ -1185,8 +893,8 @@ Yarn主要包括两个重要的部分，一个是资源管理器(resource mana
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/%E6%8E%A8%E8%8D%90%E7%B3%BB%E7%BB%9F/">
-                        <span class="chip bg-color">推荐系统</span>
+                    <a href="/tags/%E5%AE%9E%E4%BE%8B/">
+                        <span class="chip bg-color">实例</span>
                     </a>
                     
                 </div>

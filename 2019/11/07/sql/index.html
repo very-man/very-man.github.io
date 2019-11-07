@@ -4,28 +4,25 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="mysql, 孙亮亮的博客">
-    <meta name="description" content="3.4. mysql字段规范数值类型
+    <meta name="keywords" content="sql 优化, 孙亮亮的博客">
+    <meta name="description" content="减少IO量
+建立分区表
 
+只查找有效列
 
-整数类型
-字节
-范围（有符号）
-范围（无符号）
-用途
+where过滤不要的数据
 
+limit适当使用
 
+合并不同sql，读一次原表做多次计算
 
-TINYINT
-1 字节
-(-128，127)
-(0，255)
-小整数值
+字查询合并
+计算优化
+mapjoin优化
+一、应用场景
 
-
-SMALLINT
-2 字节
-(-32 768，32 767)">
+大小表数据相差大，小表满足限制条件
+不等值条件，o">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -33,7 +30,7 @@ SMALLINT
     <meta name="format-detection" content="telephone=no">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <title>mysql | 孙亮亮的博客</title>
+    <title>sql 优化 | 孙亮亮的博客</title>
     <link rel="icon" type="image/png" href="/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
@@ -324,13 +321,13 @@ SMALLINT
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/2.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/16.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
                     <div class="description center-align post-title">
-                        mysql
+                        sql 优化
                     </div>
                 </div>
             </div>
@@ -442,8 +439,8 @@ SMALLINT
                     
                     <div class="article-tag">
                         
-                            <a href="/tags/mysql/">
-                                <span class="chip bg-color">mysql</span>
+                            <a href="/tags/%E4%BC%98%E5%8C%96/">
+                                <span class="chip bg-color">优化</span>
                             </a>
                         
                     </div>
@@ -454,8 +451,8 @@ SMALLINT
                     <div class="post-cate">
                         <i class="fas fa-bookmark fa-fw icon-category"></i>
                         
-                            <a href="/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/" class="post-category">
-                                数据库
+                            <a href="/categories/sql/" class="post-category">
+                                sql
                             </a>
                         
                     </div>
@@ -467,7 +464,7 @@ SMALLINT
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2019-11-05
+                    2019-11-07
                 </div>
                 
 
@@ -476,14 +473,14 @@ SMALLINT
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    2k
+                    460
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                    9 分
+                    1 分
                 </div>
                 
 				
@@ -499,324 +496,61 @@ SMALLINT
         <hr class="clearfix">
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h1 id="3-4-mysql"><a href="#3-4-mysql" class="headerlink" title="3.4. mysql"></a>3.4. mysql</h1><h2 id="字段规范"><a href="#字段规范" class="headerlink" title="字段规范"></a>字段规范</h2><h3 id="数值类型"><a href="#数值类型" class="headerlink" title="数值类型"></a>数值类型</h3><table>
-<thead>
-<tr>
-<th>整数类型</th>
-<th>字节</th>
-<th>范围（有符号）</th>
-<th>范围（无符号）</th>
-<th>用途</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>TINYINT</td>
-<td>1 字节</td>
-<td>(-128，127)</td>
-<td>(0，255)</td>
-<td>小整数值</td>
-</tr>
-<tr>
-<td>SMALLINT</td>
-<td>2 字节</td>
-<td>(-32 768，32 767)</td>
-<td>(0，65 535)</td>
-<td>大整数值</td>
-</tr>
-<tr>
-<td>MEDIUMINT</td>
-<td>3 字节</td>
-<td>(-8 388 608，8 388 607)</td>
-<td>(0，16 777 215)</td>
-<td>大整数值</td>
-</tr>
-<tr>
-<td>INT或INTEGER</td>
-<td>4 字节</td>
-<td>(-2 147 483 648，2 147 483 647)</td>
-<td>(0，4 294 967 295)</td>
-<td>大整数值</td>
-</tr>
-<tr>
-<td>BIGINT</td>
-<td>8 字节</td>
-<td>(-9 233 372 036 854 775 808，9 223 372 036 854 775 807)</td>
-<td>(0，18 446 744 073 709 551 615)</td>
-<td>极大整数值</td>
-</tr>
-<tr>
-<td>FLOAT</td>
-<td>4 字节</td>
-<td>(-3.402 823 466 E+38，-1.175 494 351 E-38)，0，(1.175 494 351 E-38，3.402 823 466 351 E+38)</td>
-<td>0，(1.175 494 351 E-38，3.402 823 466 E+38)</td>
-<td>单精度浮点数值</td>
-</tr>
-<tr>
-<td>DOUBLE</td>
-<td>8 字节</td>
-<td>(-1.797 693 134 862 315 7 E+308，-2.225 073 858 507 201 4 E-308)，0，(2.225 073 858 507 201 4 E-308，1.797 693 134 862 315 7 E+308)</td>
-<td>0，(2.225 073 858 507 201 4 E-308，1.797 693 134 862 315 7 E+308)</td>
-<td>双精度浮点数值</td>
-</tr>
-<tr>
-<td>DECIMAL</td>
-<td>对DECIMAL(M,D) ，如果M&gt;D，为M+2否则为D+2</td>
-<td>依赖于M和D的值</td>
-<td>依赖于M和D的值</td>
-<td>小数值</td>
-</tr>
-</tbody></table>
-<h3 id="日期和时间类型"><a href="#日期和时间类型" class="headerlink" title="日期和时间类型"></a>日期和时间类型</h3><table>
-<thead>
-<tr>
-<th>类型</th>
-<th>字节</th>
-<th>范围</th>
-<th>格式</th>
-<th>用途</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>DATE</td>
-<td>3</td>
-<td>1000-01-01/9999-12-31</td>
-<td>YYYY-MM-DD</td>
-<td>日期值</td>
-</tr>
-<tr>
-<td>TIME</td>
-<td>3</td>
-<td>‘-838:59:59’/‘838:59:59’</td>
-<td>HH:MM:SS</td>
-<td>时间值或持续时间</td>
-</tr>
-<tr>
-<td>YEAR</td>
-<td>1</td>
-<td>1901/2155</td>
-<td>YYYY</td>
-<td>年份值</td>
-</tr>
-<tr>
-<td>DATETIME</td>
-<td>8</td>
-<td>1000-01-01 00:00:00/9999-12-31 23:59:59</td>
-<td>YYYY-MM-DD HH:MM:SS</td>
-<td>混合日期和时间值</td>
-</tr>
-<tr>
-<td>TIMESTAMP</td>
-<td>4</td>
-<td>1970-01-01 00:00:00/2037 年某时</td>
-<td>YYYYMMDD HHMMSS</td>
-<td>混合日期和时间值，时间戳</td>
-</tr>
-</tbody></table>
-<h3 id="字符串类型"><a href="#字符串类型" class="headerlink" title="字符串类型"></a>字符串类型</h3><table>
-<thead>
-<tr>
-<th>类型</th>
-<th>大小</th>
-<th>用途</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>CHAR</td>
-<td>0-255字节</td>
-<td>定长字符串</td>
-</tr>
-<tr>
-<td>VARCHAR</td>
-<td>0-65535 字节</td>
-<td>变长字符串</td>
-</tr>
-<tr>
-<td>TINYBLOB</td>
-<td>0-255字节</td>
-<td>不超过 255 个字符的二进制字符串</td>
-</tr>
-<tr>
-<td>TINYTEXT</td>
-<td>0-255字节</td>
-<td>短文本字符串</td>
-</tr>
-<tr>
-<td>BLOB</td>
-<td>0-65 535字节</td>
-<td>二进制形式的长文本数据</td>
-</tr>
-<tr>
-<td>TEXT</td>
-<td>0-65 535字节</td>
-<td>长文本数据</td>
-</tr>
-<tr>
-<td>MEDIUMBLOB</td>
-<td>0-16 777 215字节</td>
-<td>二进制形式的中等长度文本数据</td>
-</tr>
-<tr>
-<td>MEDIUMTEXT</td>
-<td>0-16 777 215字节</td>
-<td>中等长度文本数据</td>
-</tr>
-<tr>
-<td>LONGBLOB</td>
-<td>0-4 294 967 295字节</td>
-<td>二进制形式的极大文本数据</td>
-</tr>
-<tr>
-<td>LONGTEXT</td>
-<td>0-4 294 967 295字节</td>
-<td>极大文本数据</td>
-</tr>
-</tbody></table>
-<h2 id="操作规范"><a href="#操作规范" class="headerlink" title="操作规范"></a>操作规范</h2><ol>
-<li>1、SQL语句必须使用预绑定操作，不允许用变量拼接SQL，例如：select name from user where level = :level</li>
-<li>2、查询时如果确定只有一条记录，要加上limit 1，例如：select name from user where uid = :uid limit 1</li>
-<li>3、每张表必须有一个自增字段“id”为 primary key</li>
-<li>4、根据需求合理配置每个字段的数据类型和长度</li>
-<li>5、只有插入操作的表必须要有 create_time 字段记录插入操作的时间，同时有插入和更新操作的表必须要有 create_time 和 update_time 分别记录插入操作的时间和更新操作的时间</li>
-<li>6、每张表必须根据需求合理设置表索引</li>
-<li>7、日志表只允许插入操作,不允许更新操作</li>
-<li>8、尽量减少联表搜索的操作</li>
-<li>9、所有线上活动项目的 DB 写操作必须为异步</li>
-<li>10、所有 SQL 语句在上线前必须通过 explain 指令检查效率,并根据 explain 结果对SQL 语句进行优化<h2 id="存储引擎"><a href="#存储引擎" class="headerlink" title="存储引擎"></a>存储引擎</h2>统一采用Innodb作为存储引擎，MyISAM引擎在写入操作较多的情况下锁表是致命伤 如果你想了解更多关于Innodb的信息，可以阅读如下文章 <a href="http://imysql.com/2014/11/01/mysql-faq-convert-myisam-to-innodb-tips.shtml" target="_blank" rel="noopener">从MyISAM转到InnoDB需要注意什么</a><br><a href="http://imysql.com/2014/11/01/mysql-faq-convert-myisam-to-innodb-tips.shtml" target="_blank" rel="noopener">InnoDB事务隔离级别、行锁、死锁解读</a><h2 id="索引"><a href="#索引" class="headerlink" title="索引"></a>索引</h2></li>
+                <h1 id="减少IO量"><a href="#减少IO量" class="headerlink" title="减少IO量"></a>减少IO量</h1><ol>
+<li><p>建立分区表</p>
+</li>
+<li><p>只查找有效列</p>
+</li>
+<li><p>where过滤不要的数据</p>
+</li>
+<li><p>limit适当使用</p>
+</li>
+<li><p>合并不同sql，读一次原表做多次计算</p>
+</li>
+<li><p>字查询合并</p>
+<h1 id="计算优化"><a href="#计算优化" class="headerlink" title="计算优化"></a>计算优化</h1></li>
+<li><p>mapjoin优化</p>
+<p>一、应用场景</p>
+<ol>
+<li>大小表数据相差大，小表满足限制条件</li>
+<li>不等值条件，or条件等复杂on条件</li>
 </ol>
-<ul>
-<li>每张表必须拥有主键唯一索引</li>
-<li>合理的设置索引，比如微信用户表</li>
-</ul>
-<pre><code>+----------------+---------------------+------+-----+---------+----------------+
-| Field          | Type                | Null | Key | Default | Extra          |
-+----------------+---------------------+------+-----+---------+----------------+
-| id             | int(11) unsigned    | NO   | PRI | NULL    | auto_increment |
-| app_id         | varchar(50)         | YES  | MUL | NULL    |                |
-| openid         | varchar(50)         | NO   |     |         |                |
-| subscribe      | tinyint(4) unsigned | NO   |     | NULL    |                |
-| nickname       | tinyblob            | NO   |     | NULL    |                |
-| sex            | tinyint(4)          | YES  |     | NULL    |                |
-| language       | varchar(10)         | YES  |     | NULL    |                |
-| city           | varchar(30)         | YES  |     | NULL    |                |
-| province       | varchar(10)         | YES  |     | NULL    |                |
-| country        | varchar(20)         | YES  |     | NULL    |                |
-| headimgurl     | varchar(200)        | YES  |     | NULL    |                |
-| subscribe_time | int(11)             | YES  |     | NULL    |                |
-| unionid        | varchar(50)         | YES  |     | NULL    |                |
-| update_time    | datetime            | YES  |     | NULL    |                |
-| create_time    | datetime            | YES  |     | NULL    |                |
-+----------------+---------------------+------+-----+---------+----------------+</code></pre><p>其中app_id和openid根据微信文档说明可知一个openid在同一个公众号下一定是唯一的，这里就需要给app_id和openid添加联合唯一索引</p>
-<pre><code>*************************** 2. row ***************************
-        Table: user_info
-   Non_unique: 0
-     Key_name: un_appid_openid
- Seq_in_index: 1
-  Column_name: app_id
-    Collation: A
-  Cardinality: 2
-     Sub_part: NULL
-       Packed: NULL
-         Null: YES
-   Index_type: BTREE
-      Comment:
-Index_comment:
-*************************** 3. row ***************************
-        Table: user_info
-   Non_unique: 0
-     Key_name: un_appid_openid
- Seq_in_index: 2
-  Column_name: openid
-    Collation: A
-  Cardinality: 7426
-     Sub_part: NULL
-       Packed: NULL
-         Null:
-   Index_type: BTREE
-      Comment:
-Index_comment:</code></pre><h2 id="如何合理的设置索引"><a href="#如何合理的设置索引" class="headerlink" title="如何合理的设置索引"></a>如何合理的设置索引</h2><p>一般情况下很容易从业务角度来建立基本的索引，比如需要根据user_name来查询用户信息，那么user_name就需要加上索引，如果需要了解你的sql是否需要添加索引，你可以执行如下语句</p>
-<p><code>EXPLAIN select * from xnfjnhb_reward where hongbao_id = 1</code><br>结果</p>
-<pre><code>+----+-------------+----------------+------+---------------+------+---------+------+--------+-------------+
-| id | select_type | table          | type | possible_keys | key  | key_len | ref  | rows   | Extra       |
-+----+-------------+----------------+------+---------------+------+---------+------+--------+-------------+
-|  1 | SIMPLE      | xnfjnhb_reward | ALL  | NULL          | NULL | NULL    | NULL | 182689 | Using where |
-+----+-------------+----------------+------+---------------+------+---------+------+--------+-------------+</code></pre><p>可以看到rows执行了182689行，Extra指明了Using where需要优化，type为ALL全表扫描</p>
-<p>我们给hongbao_id添加一个索引然后在执行EXPLAIN</p>
-<pre><code>*************************** 2. row ***************************
-        Table: xnfjnhb_reward
-   Non_unique: 1
-     Key_name: idx_hongbao_id
- Seq_in_index: 1
-  Column_name: hongbao_id
-    Collation: A
-  Cardinality: 183991
-     Sub_part: NULL
-       Packed: NULL
-         Null: YES
-   Index_type: BTREE
-      Comment:
-Index_comment:</code></pre><pre><code>+----+-------------+----------------+------+----------------+----------------+---------+-------+------+-------+
-| id | select_type | table          | type | possible_keys  | key            | key_len | ref   | rows | Extra |
-+----+-------------+----------------+------+----------------+----------------+---------+-------+------+-------+
-|  1 | SIMPLE      | xnfjnhb_reward | ref  | idx_hongbao_id | idx_hongbao_id | 5       | const |    1 | NULL  |
-+----+-------------+----------------+------+----------------+----------------+---------+-------+------+-------+</code></pre><p>可以看到type已经走了ref索引，rows瞬间变为了1，Extra也为NULL</p>
-<blockquote>
-<p>我举的这个例子可能并不能看到明显的性能提升，因为数据量还没有达到一定的级别，但是并不能因此就忽略了索引的重要性，因为如果是后期添加索引将是一件困难的事情</p>
-<p>找到一个不太恰当的例子，假如真的有如下SQL语句来看看索引前后的查询速度差别</p>
-</blockquote>
-<pre><code>//索引前
-select count(*),hongbao_id from xnfjnhb_reward group by hongbao_id having count(*) &gt; 1
-5180 rows in set (2.27 sec)</code></pre><pre><code>//索引后
-select count(*),hongbao_id from xnfjnhb_reward group by hongbao_id having count(*) &gt; 1
-5180 rows in set (0.16 sec)</code></pre><p>更多优化技巧你可以阅读下面的文章 <a href="http://imysql.cn/node/35" target="_blank" rel="noopener">MySQL 优化EXPLAIN</a></p>
-<h2 id="在PDO中使用Mysql证书"><a href="#在PDO中使用Mysql证书" class="headerlink" title="在PDO中使用Mysql证书"></a>在PDO中使用Mysql证书</h2><ul>
-<li>如果项目中操作数据库有安全性要求，例如要求连接mysql时必须使用证书，那么就需要在使用PDO时，添加相应的配置项。</li>
-<li></li>
-<li>其中着重注意，如果证书是由服务器端自生成的，那么有可能会引起连接过程中无法验证证书，处理方法类似curl请求https时，忽略证书验证的方法。 而且PDO连接数据库时需要忽略证书的选项(PDO::MYSQL_ATTR_SSL_VERIFY_SERVER_CERT)并没有明文写在PHP官方手册中，而是在手册的评论中被指出：</li>
-</ul>
-<pre><code>There is an important undocumented attribute which disables certificate CN verification available after
-5.6.22 (not sure), 7.0.18 (verified) and 7.1.15 (not sure)
+<p>二、限制条件</p>
+<ol>
+<li>left join的左表必须是大表</li>
+<li>right join的右表必须是大表</li>
+<li>inner join左右均可为大表</li>
+<li>full join不能使用mapjoin</li>
+<li>mapjoin支持小表为子查询</li>
+<li>使用mapjoin时，需要引用小表子字查询时，需要引用别名</li>
+<li>mapjoin可以使用不等值或者or连接多个条件</li>
+<li>多表join时，最左边的两个表不能同时是mapjoin的表</li>
+</ol>
+<p>三、数据倾斜，导致长尾</p>
+<ol>
+<li>key热点先去重或者过滤（null，空等）</li>
+<li>显性制定mapjoin</li>
+</ol>
+</li>
+<li><p>两表join时如果字段类型不一样，则使用cast显性转换</p>
+</li>
+<li><p>聚合运算时少用distinct，如果groupby 的key有缺省值，可以尝试将sql改写。</p>
+<pre><code> select pid,sum(price) from sales
+ group by pid(假定存在大量缺省无效值为-1)
 
-PDO::MYSQL_ATTR_SSL_VERIFY_SERVER_CERT
-
-possible values: true, false
-default value: true 
-
-Related PHP bugs:
-https://bugs.php.net/bug.php?id=71845
-https://bugs.php.net/bug.php?id=71003
-
-and github PR: https://github.com/php/php-src/pull/1913</code></pre><p>综上，示例配置如下：</p>
-<p>yaf项目请修改library/DB.php文件，参考配置如下：</p>
-<pre><code>
-$options = ENVIRONMENT != 'develop' ? [
-        PDO::MYSQL_ATTR_SSL_KEY   =&gt; APPLICATION_PATH."/ssl/".ENVIRONMENT.'/client-key.pem',
-        PDO::MYSQL_ATTR_SSL_CERT  =&gt; APPLICATION_PATH."/ssl/".ENVIRONMENT.'/client-cert.pem',
-        PDO::MYSQL_ATTR_SSL_CA    =&gt; APPLICATION_PATH."/ssl/".ENVIRONMENT.'/cacert.pem',
-        PDO::MYSQL_ATTR_SSL_VERIFY_SERVER_CERT =&gt; false,
-        PDO::ATTR_TIMEOUT =&gt; 1
-    ] : [ PDO::ATTR_TIMEOUT =&gt;1 ];
-$db = new PDO('mysql:host='.$db_config-&gt;host.';dbname='.$db_config-&gt;database, $db_config-&gt;username, $db_config-&gt;password,$options);</code></pre><p>laravel项目请修改config/database.php文件，参考配置如下：</p>
-<pre><code>'mysql' =&gt; [
-    'driver'      =&gt; 'mysql',
-    'host'        =&gt; env('DB_HOST', '127.0.0.1'),
-    'port'        =&gt; env('DB_PORT', '3306'),
-    'database'    =&gt; env('DB_DATABASE', ''),
-    'username'    =&gt; env('DB_USERNAME', ''),
-    'password'    =&gt; env('DB_PASSWORD', ''),
-    'unix_socket' =&gt; env('DB_SOCKET', ''),
-    'charset'     =&gt; 'utf8mb4',
-    'collation'   =&gt; 'utf8mb4_unicode_ci',
-    'prefix'      =&gt; '',
-    'strict'      =&gt; true,
-    'engine'      =&gt; null,
-    'options'     =&gt; ENVIRONMENT != 'develop'?[
-        PDO::MYSQL_ATTR_SSL_KEY   =&gt; base_path("ssl/".ENVIRONMENT.'/client-key.pem'),
-        PDO::MYSQL_ATTR_SSL_CERT  =&gt; base_path("ssl/".ENVIRONMENT.'/client-cert.pem'),
-        PDO::MYSQL_ATTR_SSL_CA    =&gt; base_path("ssl/".ENVIRONMENT.'/cacert.pem'),
-        PDO::MYSQL_ATTR_SSL_VERIFY_SERVER_CERT =&gt; false
-        PDO::ATTR_TIMEOUT =&gt; 1
-    ] : [ PDO::ATTR_TIMEOUT =&gt; 1 ];
-],</code></pre><script>
+ select newpid,sum(price) from (select case when pid=-1 then concat(rand(),'default') else pid end as newpid from sales) group by newpid</code></pre></li>
+<li><p>多表join时join顺序很重要，优先选择join结果输出小的表先关联</p>
+</li>
+<li><p>动态分区（可能会导致小文件过多），推荐建表时采用写入静态分区</p>
+</li>
+<li><p>使用窗口，内置的udf，避免使用order by</p>
+</li>
+<li><p>适当的做一个中间表，对中间表进行计算</p>
+<h1 id="寻找问题"><a href="#寻找问题" class="headerlink" title="寻找问题"></a>寻找问题</h1></li>
+<li><p>常用explain命令，logview的使用</p>
+</li>
+</ol>
+<script>
         document.querySelectorAll('.github-emoji')
           .forEach(el => {
             if (!el.dataset.src) { return; }
@@ -859,7 +593,7 @@ $db = new PDO('mysql:host='.$db_config-&gt;host.';dbname='.$db_config-&gt;databa
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="https//very-man.github.io/2019/11/05/new-blog/">https//very-man.github.io/2019/11/05/new-blog/</a>
+                    <a href="https//very-man.github.io/2019/11/07/sql/">https//very-man.github.io/2019/11/07/sql/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -897,8 +631,8 @@ $db = new PDO('mysql:host='.$db_config-&gt;host.';dbname='.$db_config-&gt;databa
                     
                         <div class="article-tag">
                             
-                                <a href="/tags/mysql/">
-                                    <span class="chip bg-color">mysql</span>
+                                <a href="/tags/%E4%BC%98%E5%8C%96/">
+                                    <span class="chip bg-color">优化</span>
                                 </a>
                             
                         </div>
@@ -1069,7 +803,7 @@ $db = new PDO('mysql:host='.$db_config-&gt;host.';dbname='.$db_config-&gt;databa
         repo: 'very-man.github.io',
         owner: 'very-man',
         admin: "very-man",
-        id: '2019-11-05T20-49-59',
+        id: '2019-11-07T11-18-05',
         distractionFreeMode: false  // Facebook-like distraction free mode
     });
 
@@ -1094,22 +828,36 @@ $db = new PDO('mysql:host='.$db_config-&gt;host.';dbname='.$db_config-&gt;databa
             <div class="article-badge left-badge text-color">
                 <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
             <div class="card">
-                <a href="/2019/11/07/hello-world/">
+                <a href="/2019/11/07/shu-ju-qing-xi/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/11.jpg" class="responsive-img" alt="大数据常见名词解释">
+                        <img src="/medias/featureimages/3.jpg" class="responsive-img" alt="数据清洗常见方法">
                         
-                        <span class="card-title">大数据常见名词解释</span>
+                        <span class="card-title">数据清洗常见方法</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            
-Yarn 是主流的资源调度系统(Yarn是“Yet Another Resource Negotiator”的缩写，字面意思就是“==另一种资源调度器==”)
+                            减少IO量
+建立分区表
 
-Yarn主要包括两个重要的部分，一个是资源管理器(resource mana
+只查找有效列
+
+where过滤不要的数据
+
+limit适当使用
+
+合并不同sql，读一次原表做多次计算
+
+字查询合并
+计算优化
+mapjoin优化
+一、应用场景
+
+大小表数据相差大，小表满足限制条件
+不等值条件，o
                         
                     </div>
                     <div class="publish-info">
@@ -1131,8 +879,8 @@ Yarn主要包括两个重要的部分，一个是资源管理器(resource mana
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/%E7%A7%91%E6%99%AE/">
-                        <span class="chip bg-color">科普</span>
+                    <a href="/tags/%E8%84%8F%E6%95%B0%E6%8D%AE/">
+                        <span class="chip bg-color">脏数据</span>
                     </a>
                     
                 </div>
@@ -1146,36 +894,32 @@ Yarn主要包括两个重要的部分，一个是资源管理器(resource mana
                 下一篇&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/2019/11/05/tuijian-system/">
+                <a href="/2019/11/07/lalian/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/20.jpg" class="responsive-img" alt="推荐系统">
+                        <img src="/medias/featureimages/11.jpg" class="responsive-img" alt="拉链表">
                         
-                        <span class="card-title">推荐系统</span>
+                        <span class="card-title">拉链表</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            推荐系统
-推荐算法的本质是通过一定的方式将用户和物品联系起来，而不同的推荐系统利用了不同的方式
-在信息过载的环境中帮助用户发现令他们感兴趣的信息，也能将信息推送给对它们感兴趣的用户
-
-1.推荐系统的应用
-电子商务:亚马逊基于物品的推荐 好友
+                            拉链表的使用场景在数据仓库的数据模型设计过程中，经常会遇到下面这种表的设计：
+有一些表的数据量很大，比如一张用户表，大约10亿条记录，50个字段，这种表，即使使用ORC压缩，单张表的存储也会超过100G，在HDFS使用双备份或者三备份的话就
                         
                     </div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2019-11-05
+                                <i class="far fa-clock fa-fw icon-date"></i>2019-11-07
                             </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
                             
-                            <a href="/categories/%E6%8E%A8%E8%8D%90%E7%B3%BB%E7%BB%9F/" class="post-category">
-                                    推荐系统
+                            <a href="/categories/mysql/" class="post-category">
+                                    mysql
                                 </a>
                             
                             
@@ -1185,8 +929,8 @@ Yarn主要包括两个重要的部分，一个是资源管理器(resource mana
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/%E6%8E%A8%E8%8D%90%E7%B3%BB%E7%BB%9F/">
-                        <span class="chip bg-color">推荐系统</span>
+                    <a href="/tags/%E8%A1%A8%E8%AE%BE%E8%AE%A1/">
+                        <span class="chip bg-color">表设计</span>
                     </a>
                     
                 </div>
