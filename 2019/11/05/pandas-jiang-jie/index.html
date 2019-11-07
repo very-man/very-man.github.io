@@ -465,7 +465,7 @@ df.loc[0:2,[&#39;">
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    359
+                    356
                 </div>
                 
 
@@ -528,9 +528,9 @@ df<span class="token punctuation">.</span>concat<span class="token punctuation">
 <pre><code>Concat 函数可以在下方或旁边合并一个或多个 dataframe</code></pre><p><img src="https://static.leiphone.com/uploads/new/article/740_740/201807/5b4daba39bba9.png?imageMogr2/format/jpg/quality/90" alt=""></p>
 <pre class="line-numbers language-python"><code class="language-python"><span class="token keyword">import</span> pandas <span class="token keyword">as</span> pd 
 <span class="token comment" spellcheck="true"># 好用的函数之map（有类似匹配映射时可以使用）</span>
-df<span class="token punctuation">.</span>Animal<span class="token punctuation">.</span>map<span class="token punctuation">(</span><span class="token keyword">lambda</span> x<span class="token punctuation">:</span><span class="token string">'贵'</span> <span class="token keyword">if</span> x<span class="token operator">&gt;</span><span class="token number">10</span> <span class="token keyword">else</span> <span class="token string">'便宜'</span><span class="token punctuation">)</span>
+df<span class="token punctuation">.</span>Animal<span class="token punctuation">.</span>map<span class="token punctuation">(</span><span class="token keyword">lambda</span> x<span class="token punctuation">:</span><span class="token string">'贵'</span> <span class="token keyword">if</span> x<span class="token operator">></span><span class="token number">10</span> <span class="token keyword">else</span> <span class="token string">'便宜'</span><span class="token punctuation">)</span>
 <span class="token comment" spellcheck="true"># 好用的函数之apply（对dataframe的每一列应用函数）</span>
-df<span class="token punctuation">.</span>Animal<span class="token punctuation">.</span>map<span class="token punctuation">(</span><span class="token keyword">lambda</span> x<span class="token punctuation">:</span><span class="token string">'贵'</span> <span class="token keyword">if</span> x<span class="token operator">&gt;</span><span class="token number">10</span> <span class="token keyword">else</span> <span class="token string">'便宜'</span><span class="token punctuation">)</span>
+df<span class="token punctuation">.</span>Animal<span class="token punctuation">.</span>map<span class="token punctuation">(</span><span class="token keyword">lambda</span> x<span class="token punctuation">:</span><span class="token string">'贵'</span> <span class="token keyword">if</span> x<span class="token operator">></span><span class="token number">10</span> <span class="token keyword">else</span> <span class="token string">'便宜'</span><span class="token punctuation">)</span>
 <span class="token comment" spellcheck="true"># 好用的函数之applymap（对dataframe的每一列应用函数）</span>
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <pre><code>pandas和sql的比较</code></pre><pre class="line-numbers language-python"><code class="language-python"><span class="token keyword">import</span> pandas <span class="token keyword">as</span> pd 
@@ -538,7 +538,7 @@ df<span class="token punctuation">.</span>Animal<span class="token punctuation">
 df<span class="token punctuation">[</span><span class="token punctuation">[</span><span class="token string">'Animal'</span><span class="token punctuation">]</span><span class="token punctuation">]</span>
 df<span class="token punctuation">.</span>loc<span class="token punctuation">[</span><span class="token punctuation">:</span><span class="token punctuation">,</span><span class="token string">'Animal'</span><span class="token punctuation">]</span>
 <span class="token comment" spellcheck="true"># 好用的函数之apply（对dataframe的每一列应用函数）</span>
-df<span class="token punctuation">.</span>Animal<span class="token punctuation">.</span>map<span class="token punctuation">(</span><span class="token keyword">lambda</span> x<span class="token punctuation">:</span><span class="token string">'贵'</span> <span class="token keyword">if</span> x<span class="token operator">&gt;</span><span class="token number">10</span> <span class="token keyword">else</span> <span class="token string">'便宜'</span><span class="token punctuation">)</span>
+df<span class="token punctuation">.</span>Animal<span class="token punctuation">.</span>map<span class="token punctuation">(</span><span class="token keyword">lambda</span> x<span class="token punctuation">:</span><span class="token string">'贵'</span> <span class="token keyword">if</span> x<span class="token operator">></span><span class="token number">10</span> <span class="token keyword">else</span> <span class="token string">'便宜'</span><span class="token punctuation">)</span>
 <span class="token comment" spellcheck="true"># 好用的函数之applymap（对dataframe的每一列应用函数）</span>
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <script>
